@@ -1,0 +1,6 @@
+.vs/
+bin/
+obj/
+e2e/
+node_modules/
+environments/

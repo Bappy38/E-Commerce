@@ -1,0 +1,43 @@
+<body>
+    <!--admin-plist-->
+    <br>
+
+    <button class="btn btn-success"> 
+        Add New Product <mat-icon color="primary"> 
+        <span class="material-icons-outlined">post_add</span> 
+    </mat-icon> </button>
+
+    <br><br>
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <th>Product Order</th>
+            <th>Product Name</th>
+            <th>Unit Price</th>
+            <th>Unit Name</th>
+            <th>Image Url</th>
+            <th>Quantity</th>
+            <th><strong>Action</strong></th>
+        </tr>
+
+        <tr *ngFor = "let product of prodList">
+            <td>{{product.pOrder}}</td>
+            <td>{{product.pName}}</td>
+            <td>{{product.pPrice}}</td>
+            <td>{{product.pUnit}}</td>
+            <td>{{product.pImage}}</td>
+            <td>{{product.pQuantity}}</td>
+
+            <td>
+                <button mat-icon-button> 
+                    <mat-icon color="primary"><span class="material-icons-outlined">edit</span></mat-icon> </button>
+
+                <button mat-icon-button> 
+                    <mat-icon color="warn"><span class="material-icons-outlined">delete_forever</span></mat-icon> </button>
+            </td>
+        </tr>
+    
+        </tbody>
+    </table>
+</body>
