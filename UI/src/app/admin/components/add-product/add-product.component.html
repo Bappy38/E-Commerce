@@ -1,47 +1,53 @@
-<body>
-    <div>
-        <h1 class="field">Product Info</h1>
-        <form [formGroup]="newProductForm" (ngSubmit)="onSubmit()">
+<app-admin-nav></app-admin-nav>
 
-            <mat-form-field appearance="outline" class="field">
-                <mat-label>Product Order</mat-label>
-                <input required matInput placeholder="Enter the order no to sort product" 
-                formControlName="pOrder">
-                </mat-form-field><br>
-            
-            <mat-form-field appearance="outline" class="field">
-            <mat-label>Product Name</mat-label>
-            <input required matInput placeholder="Enter the product name" 
-            formControlName="pName">
+<div class="container" style="margin-top: 70px;">
+    <h1 class="field">Product Info</h1>
+    <form [formGroup]="newProductForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Product Order</mat-label>
+            <input required matInput placeholder="Enter the order no to sort product" 
+            formControlName="pOrder">
             </mat-form-field><br>
-    
-            <mat-form-field appearance="outline" class="field">
-            <mat-label>Unit Price</mat-label>
-            <input required matInput placeholder="Enter product price per unit" 
-            formControlName="pPrice">
-            </mat-form-field><br>
-    
-            <mat-form-field appearance="outline" class="field">
-            <mat-label>Unit Name</mat-label>
-            <input required matInput placeholder="Enter the unit name of the product" 
-            formControlName="pUnit">
-            </mat-form-field><br>
-    
-            <mat-form-field appearance="outline" class="field">
-            <mat-label>Quantity</mat-label>
-            <input required matInput placeholder="Enter total number of unit is in stock" 
-            formControlName="pQuantity">
+        
+        <mat-form-field appearance="outline" class="field">
+        <mat-label>Product Name</mat-label>
+        <input required matInput placeholder="Enter the product name" 
+        formControlName="pName">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+        <mat-label>Unit Price</mat-label>
+        <input required matInput placeholder="Enter product price per unit" 
+        formControlName="pPrice">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+        <mat-label>Unit Name</mat-label>
+        <input required matInput placeholder="Enter the unit name of the product" 
+        formControlName="pUnit">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+        <mat-label>Quantity</mat-label>
+        <input required matInput placeholder="Enter total number of unit is in stock" 
+        formControlName="pQuantity">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Image Url</mat-label>
+            <input required matInput placeholder="Enter the image URL of the product" 
+            formControlName="pImage">
             </mat-form-field><br>
 
-            <mat-form-field appearance="outline" class="field">
-                <mat-label>Image Url</mat-label>
-                <input required matInput placeholder="Enter the image URL of the product" 
-                formControlName="pImage">
-                </mat-form-field><br>
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Product Description</mat-label>
+            <input matInput placeholder="Describe the product in short" 
+            formControlName="pDescription">
+            </mat-form-field><br>
 
-            <button mat-raised-button color="primary" style="padding-left: 20px; 
-            height: 50px; width: 150px;"  type="submit" 
-            [disabled]="!newProductForm.valid"><h5>Submit</h5></button>
-        </form>
-    </div>
-</body>
+        <button mat-raised-button color="primary" style="padding-left: 20px; 
+        height: 50px; width: 150px;"  type="submit" 
+        [disabled]="!newProductForm.valid"><h5>Submit</h5></button>
+    </form>
+</div>

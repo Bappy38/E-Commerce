@@ -35,12 +35,23 @@ namespace WebAPI.Controllers
         [HttpPut , Route("update")]
         public IActionResult UpdateProduct([FromBody]Product product)
         {
-            _productService.Put(product);
+            var prod = _productService.Get(product.pName);
+
+            if (prod == null)
+                return NotFound();
+
+            prod.pPrice = product.pPrice;
+            prod.pQuantity = product.pQuantity;
+            prod.pImage = product.pImage;
+            prod.pUnit = product.pUnit;
+            prod.pDescription = product.pDescription;
+
+            _productService.Put(prod);
             return Ok();
         }
 
         //Delete a product
-        [HttpDelete , Route("delete")]
+        [HttpPost , Route("delete")]
         public IActionResult DeleteProduct([FromBody]Product product)
         {
             var prod = _productService.Get(product.pName);

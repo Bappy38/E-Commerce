@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {MatDialog , MatDialogConfig, MatDialogModule} from '@angular/material/dialog';
+import { AddProductComponent } from '../add-product/add-product.component';
 
 @Component({
   selector: 'app-admin-nav',
@@ -8,9 +10,13 @@ import {Router} from '@angular/router';
 })
 export class AdminNavComponent implements OnInit {
 
-  constructor(private router : Router) { }
+  constructor(private router : Router , private dialog : MatDialog) { }
 
   ngOnInit(): void {
+  }
+  
+  addProduct(){
+    this.router.navigate(['add-product']);
   }
 
   logOut(){

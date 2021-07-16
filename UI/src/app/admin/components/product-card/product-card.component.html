@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="p-3">
+        <div class="card">
+            <div class="img-wrapper">
+                <img class="card-img-top" src="{{product.pImage}}">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{product.pName}}</h5>
+              <p class="card-text">{{product.pPrice}} Tk per {{product.pUnit}}</p>
+
+              <div class="btn-group" role="group" style="margin-left: 12%; width: 10rem;">
+                <button type="button" class="btn btn-dark" (click)="openEditDialog()">Edit</button>
+                <button type="button" class="btn btn-danger" (click)="openRemoveDialog()">Delete</button>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>

@@ -36,7 +36,7 @@ namespace WebAPI.Services
 
         //Update a product details
         public void Put(Product updatedProduct) =>
-            _products.ReplaceOne(product => product.Id == updatedProduct.Id, updatedProduct);
+            _products.ReplaceOne(product => product.pName == updatedProduct.pName, updatedProduct);
 
         //Remove a product
         public void Delete(Product pr) =>

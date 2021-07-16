@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
     {
         private readonly AuthService _authService;
 
-        private AuthController(AuthService authService)
+        public AuthController(AuthService authService)
         {
             _authService = authService;
         }
@@ -92,6 +92,7 @@ namespace WebAPI.Controllers
         [HttpPost , Route("user-signup")]
         public IActionResult userSignUp([FromBody]User user)
         {
+            Console.WriteLine("User SignUP Function in auth controller!");
             var credential = _authService.Get(user.UserName);
 
             if (credential != null)

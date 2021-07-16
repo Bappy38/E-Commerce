@@ -16,7 +16,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebAPI.Services;
+using static WebAPI.Models.OrderDBSetting;
 using static WebAPI.Models.ProductDBSetting;
+using static WebAPI.Models.UserCartDBSetting;
+using static WebAPI.Models.UserDBSetting;
 
 namespace WebAPI
 {
@@ -40,6 +43,36 @@ namespace WebAPI
                 sp.GetRequiredService<IOptions<ProductListDBSetting>>().Value);
 
             services.AddSingleton<ProductService>();
+            //
+
+            //Add user database
+            services.Configure<UserListDBSetting>(
+                Configuration.GetSection(nameof(UserListDBSetting)));
+
+            services.AddSingleton<IUserListDBSetting>(sp =>
+                sp.GetRequiredService<IOptions<UserListDBSetting>>().Value);
+
+            services.AddSingleton<AuthService>();
+            //
+
+            //Add user cart database
+            services.Configure<UserCartListDBSetting>(
+                Configuration.GetSection(nameof(UserCartListDBSetting)));
+
+            services.AddSingleton<IUserCartListDBSetting>(sp =>
+                sp.GetRequiredService<IOptions<UserCartListDBSetting>>().Value);
+
+            services.AddSingleton<UserCartService>();
+            //
+
+            //Add order database
+            services.Configure<OrderListDBSetting>(
+                Configuration.GetSection(nameof(OrderListDBSetting)));
+
+            services.AddSingleton<IOrderListDBSetting>(sp =>
+                sp.GetRequiredService<IOptions<OrderListDBSetting>>().Value);
+
+            services.AddSingleton<OrderService>();
             //
 
             //Code for authentication middleware start here

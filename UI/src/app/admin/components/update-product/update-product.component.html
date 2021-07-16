@@ -1,1 +1,52 @@
-<p>update-product works!</p>
+<div class="container" style="margin-top: 70px;">
+    <h1 class="field">Product Info</h1>
+    <form [formGroup]="newProductForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Product Order</mat-label>
+            <input required matInput placeholder="Enter the order no to sort product" 
+            formControlName="pOrder" [ngModel] = "this.product.pOrder">
+            </mat-form-field><br>
+        
+        <mat-form-field appearance="outline" class="field">
+        <mat-label>Product Name</mat-label>
+        <input required matInput placeholder="Enter the product name" 
+        formControlName="pName" [ngModel] = "this.product.pName" width="100px" readonly>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+        <mat-label>Unit Price</mat-label>
+        <input required matInput placeholder="Enter product price per unit" 
+        formControlName="pPrice" [ngModel] = "this.product.pPrice">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+        <mat-label>Unit Name</mat-label>
+        <input required matInput placeholder="Enter the unit name of the product" 
+        formControlName="pUnit" [ngModel] = "this.product.pUnit">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+        <mat-label>Quantity</mat-label>
+        <input required matInput placeholder="Enter total number of unit is in stock" 
+        formControlName="pQuantity" [ngModel] = "this.product.pQuantity">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Image Url</mat-label>
+            <input required matInput placeholder="Enter the image URL of the product" 
+            formControlName="pImage" [ngModel] = "this.product.pImage">
+            </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Product Description</mat-label>
+            <input matInput placeholder="Describe the product in short" 
+            formControlName="pDescription" [ngModel] = "this.product.pDescription">
+            </mat-form-field><br>
+
+        <mat-dialog-actions>
+            <button mat-button mat-dialog-close>Cancel</button>
+            <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial>Submit</button>
+        </mat-dialog-actions>
+    </form>
+</div>
