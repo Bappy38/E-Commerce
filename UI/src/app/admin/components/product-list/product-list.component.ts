@@ -25,17 +25,6 @@ export class ProductListComponent implements OnInit {
       });
   }
 
-  openRemoveDialog(product:any){
-    /*let dialogRef =  this.dialog.open(DeleteProductComponent , {data: product});
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == 'true')
-        this.toastr.success("The product is deleted successfully!");
-
-      window.location.reload();
-    });*/
-  }
-
   openAddDialog(){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

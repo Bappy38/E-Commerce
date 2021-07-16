@@ -27,6 +27,7 @@ namespace WebAPI.Controllers
         [HttpPost , Route("admin-signin")]
         public IActionResult adminSignIn([FromBody]SignIn admin)
         {
+            Console.WriteLine(admin.UserName + ' ' + admin.Password);
             if (admin == null)
                 return BadRequest("Invalid client request");
 
