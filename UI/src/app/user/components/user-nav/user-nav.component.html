@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">FruitCorner</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">My Cart</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link" href="#">Track My Order</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link" href="#">Customer Care</a>
+          </li>
+
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for a product" aria-label="Search" style="margin-left: 10px;">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </ul>
+  
+        <ul class="navbar-nav ml-auto mb-2 mb-lg-0" >
+          <li class="nav-item" *ngIf="isUserAuthenticated()">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-dark" id="dropdownBasic1" ngbDropdownToggle>{{currUser}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu dropdown-menu-right">
+                <button ngbDropdownItem>Profile</button>
+                <button ngbDropdownItem>Change Password</button>
+                <button ngbDropdownItem (click)="logOut()">Log Out</button>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item" *ngIf="!isUserAuthenticated()">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button class="btn btn-outline-primary my-2 my-sm-0" (click)="openLoginDialog()">Login</button>
+              <button class="btn btn-outline-primary my-2 my-sm-0" (click)="openSignUpDialog()">Sign Up</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

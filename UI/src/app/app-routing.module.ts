@@ -6,12 +6,15 @@ import {AdminHomeComponent} from './admin/components/admin-home/admin-home.compo
 import {AdminLoginComponent} from './admin/components/admin-login/admin-login.component';
 import { AdminAuthGuardService } from './admin/services/admin-auth-guard.service';
 import {UpdateProductComponent} from './admin/components/update-product/update-product.component';
+import {UserHomeComponent} from './user/components/user-home/user-home.component';
 
 const routes: Routes = [
   {path: 'add-product' , component: AddProductComponent , canActivate:[AdminAuthGuardService]},
   {path: 'admin-home' , component: AdminHomeComponent , canActivate:[AdminAuthGuardService]},
   {path: 'update-product' , component: UpdateProductComponent , canActivate:[UpdateProductComponent]},
-  {path: 'admin-login' , component: AdminLoginComponent}
+  {path: 'admin-login' , component: AdminLoginComponent},
+
+  {path: '' , component: UserHomeComponent}
 ];
 
 @NgModule({

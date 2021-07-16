@@ -26,6 +26,20 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  processDriveLink(link:string):string
+  {
+    var reqUrl:string = 'https://drive.google.com/thumbnail?id=';
+    var cnt:number = 0;
+
+    for(var char of link){
+      if(char == '/')
+        cnt++;
+      if(cnt == 5 && char != '/')
+        reqUrl += char;
+    }
+    return reqUrl;
+  }
+
   onSubmit(){
     const newProduct = {
       'pOrder' : this.newProductForm.value.pOrder,
@@ -33,14 +47,15 @@ export class AddProductComponent implements OnInit {
       'pPrice' : this.newProductForm.value.pPrice,
       'pUnit' : this.newProductForm.value.pUnit,
       'pQuantity' : this.newProductForm.value.pQuantity,
-      'pImage' : this.newProductForm.value.pImage,
+      'pImage' : this.processDriveLink(this.newProductForm.value.pImage),
       'pDescription': this.newProductForm.value.pDescription
     }
 
     this.http.post("https://localhost:5001/api/product/add" , newProduct)
     .subscribe(response => {
       this.toastr.success("Product added successfully!");
-      this.router.navigate['/'];
+      this.newProductForm.reset();
+      window.location.reload();
     }, err => {
       this.toastr.error("Sorry! There're some invalid data in product details!");
       this.router.navigate['/'];

@@ -47,6 +47,8 @@ export class UpdateProductComponent implements OnInit {
     this.http.put("https://localhost:5001/api/product/update" , updatedProduct)
     .subscribe(response => {
       this.toastr.success("Product updated successfully!");
+      this.newProductForm.reset();
+      this.newProductForm.markAsUntouched();
     }, err => {
       this.toastr.error("Product update failed!");
     });

@@ -21,6 +21,12 @@ import { ProductCardComponent } from './admin/components/product-card/product-ca
 import { YesNoDialogComponent } from './common/yes-no-dialog/yes-no-dialog.component';
 import { UpdateProductComponent } from './admin/components/update-product/update-product.component';
 import { AdminLoginComponent } from './admin/components/admin-login/admin-login.component';
+import { UserPlistComponent } from './user/components/user-plist/user-plist.component';
+import { UserPcardComponent } from './user/components/user-pcard/user-pcard.component';
+import { UserHomeComponent } from './user/components/user-home/user-home.component';
+import { UserNavComponent } from './user/components/user-nav/user-nav.component';
+import { UserLoginComponent } from './user/components/user-login/user-login.component';
+import { UserSignupComponent } from './user/components/user-signup/user-signup.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -36,7 +42,13 @@ export function tokenGetter(){
     ProductCardComponent,
     YesNoDialogComponent,
     UpdateProductComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    UserPlistComponent,
+    UserPcardComponent,
+    UserHomeComponent,
+    UserNavComponent,
+    UserLoginComponent,
+    UserSignupComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
 import {AddProductComponent} from '../add-product/add-product.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-product-list',
@@ -18,6 +19,8 @@ export class ProductListComponent implements OnInit {
   constructor(private router : Router , private http : HttpClient , 
     private dialog : MatDialog , private toastr : ToastrService) { }
 
+  @ViewChild(MatPaginator) paginator : MatPaginator;
+  
   ngOnInit(): void {
     this.http.get("https://localhost:5001/api/product/query")
       .subscribe(response => {
