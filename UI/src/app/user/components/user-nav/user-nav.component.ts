@@ -26,7 +26,7 @@ export class UserNavComponent implements OnInit {
   isUserAuthenticated(){
     const token:string = localStorage.getItem("jwt");
 
-    if(token != null && !this.jwtHelper.isTokenExpired(token))
+    if(token != null && !this.jwtHelper.isTokenExpired(token) && this.jwtHelper.decodeToken(token).Role == 'user')
       return true;
     else
       return false;

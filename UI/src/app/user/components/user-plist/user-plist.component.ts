@@ -8,6 +8,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 })
 export class UserPlistComponent implements OnInit {
   prodList:any;
+  totProd:number;
+  page:number = 1;
 
   constructor(private http : HttpClient) { }
 
@@ -16,6 +18,8 @@ export class UserPlistComponent implements OnInit {
       .subscribe(response => {
         this.prodList = response;
       })
+    this.totProd = this.prodList.length;
+    this.page = 1;
   }
 
 }

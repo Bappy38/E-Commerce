@@ -15,6 +15,8 @@ import { MatPaginator } from '@angular/material/paginator';
 export class ProductListComponent implements OnInit {
 
   prodList:any;
+  totProd:number;
+  page:number = 1;
 
   constructor(private router : Router , private http : HttpClient , 
     private dialog : MatDialog , private toastr : ToastrService) { }
@@ -26,6 +28,7 @@ export class ProductListComponent implements OnInit {
       .subscribe(response => {
         this.prodList = response;
       });
+      this.totProd = this.prodList.length;
   }
 
   openAddDialog(){
@@ -43,26 +46,6 @@ export class ProductListComponent implements OnInit {
       }
     });
   }
-
-  /*
-  openUpdateDialog(product : any){
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true,
-    dialogConfig.autoFocus = true,
-    dialogConfig.width = "800px",
-    dialogConfig.height = "600px"
-
-    dialogConfig.data = product;  ///Passing data to dialog
-
-    let dialogRef = this.dialog.open(UpdateProductComponent , dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == 'true'){
-        console.log("Updated successfully!");
-      }
-    });
-  }
-  */
 
   logOut(){
     localStorage.removeItem("jwt");

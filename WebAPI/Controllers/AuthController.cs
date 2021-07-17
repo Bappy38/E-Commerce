@@ -27,7 +27,6 @@ namespace WebAPI.Controllers
         [HttpPost , Route("admin-signin")]
         public IActionResult adminSignIn([FromBody]SignIn admin)
         {
-            Console.WriteLine(admin.UserName + ' ' + admin.Password);
             if (admin == null)
                 return BadRequest("Invalid client request");
 
@@ -93,7 +92,6 @@ namespace WebAPI.Controllers
         [HttpPost , Route("user-signup")]
         public IActionResult userSignUp([FromBody]User user)
         {
-            Console.WriteLine("User SignUP Function in auth controller!");
             var credential = _authService.Get(user.UserName);
 
             if (credential != null)

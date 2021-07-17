@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -58,6 +59,7 @@ export function tokenGetter(){
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
+    NgxPaginationModule,
     ToastrModule.forRoot({
       timeOut:3000,
       progressBar:true,
