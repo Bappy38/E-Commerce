@@ -7,6 +7,7 @@ import {AdminLoginComponent} from './admin/components/admin-login/admin-login.co
 import { AdminAuthGuardService } from './admin/services/admin-auth-guard.service';
 import {UpdateProductComponent} from './admin/components/update-product/update-product.component';
 import {UserHomeComponent} from './user/components/user-home/user-home.component';
+import { UserSignupComponent } from './user/components/user-signup/user-signup.component';
 
 const routes: Routes = [
   {path: 'add-product' , component: AddProductComponent , canActivate:[AdminAuthGuardService]},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'update-product' , component: UpdateProductComponent , canActivate:[UpdateProductComponent]},
   {path: 'admin-login' , component: AdminLoginComponent},
 
-  {path: '' , component: UserHomeComponent}
+  {path: '' , component: UserHomeComponent},
+  {path: 'user-signup' , component: UserSignupComponent}
 ];
 
 @NgModule({

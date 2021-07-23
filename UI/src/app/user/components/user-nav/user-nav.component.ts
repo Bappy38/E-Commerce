@@ -3,6 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { UserSignupComponent } from '../user-signup/user-signup.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-nav',
@@ -13,7 +14,7 @@ export class UserNavComponent implements OnInit {
   currUser:string;
 
   constructor(private jwtHelper : JwtHelperService , 
-    private dialog : MatDialog) { }
+    private dialog : MatDialog , private router : Router) { }
 
   ngOnInit(): void {
     this.currUser = sessionStorage.getItem('loggedUser');
@@ -21,6 +22,7 @@ export class UserNavComponent implements OnInit {
 
   logOut(){
     localStorage.removeItem("jwt");
+    sessionStorage.removeItem('loggedUser');
   }
 
   isUserAuthenticated(){
@@ -40,12 +42,8 @@ export class UserNavComponent implements OnInit {
     });
   }
 
-  openSignUpDialog(){ 
-    let dialogRef = this.dialog.open(UserSignupComponent , {width: '400px'});
-
-    dialogRef.afterClosed().subscribe(result => {
-      ;
-    });
+  gotoSignUp(){
+    this.router.navigate(['user-signup']);
   }
 
 }

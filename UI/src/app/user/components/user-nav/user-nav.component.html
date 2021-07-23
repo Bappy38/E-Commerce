@@ -1,21 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">FruitCorner</a>
+      <a class="navbar-brand" routerLink="/">FruitCorner</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">My Cart</a>
+            <a class="nav-link active" aria-current="page" routerLink="/"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+            My Cart</a>
           </li>
   
           <li class="nav-item">
-            <a class="nav-link" href="#">Track My Order</a>
+            <a class="nav-link" routerLink="/"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+            Track My Order</a>
           </li>
   
           <li class="nav-item">
-            <a class="nav-link" href="#">Customer Care</a>
+            <a class="nav-link" routerLink="/"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+            Customer Care</a>
           </li>
 
           <form class="form-inline my-2 my-lg-0">
@@ -38,7 +44,7 @@
           <li class="nav-item" *ngIf="!isUserAuthenticated()">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button class="btn btn-outline-primary my-2 my-sm-0" (click)="openLoginDialog()">Login</button>
-              <button class="btn btn-outline-primary my-2 my-sm-0" (click)="openSignUpDialog()">Sign Up</button>
+              <button class="btn btn-outline-primary my-2 my-sm-0" (click)="gotoSignUp()">Sign Up</button>
             </div>
           </li>
         </ul>

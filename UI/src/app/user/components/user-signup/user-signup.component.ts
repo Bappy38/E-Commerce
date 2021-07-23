@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup , FormControl } from '@angular/forms';
+import { FormGroup , FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-signup',
@@ -9,25 +10,33 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./user-signup.component.css']
 })
 export class UserSignupComponent implements OnInit {
-  signupForm = new FormGroup({
-    FirstName: new FormControl(''),
-    LastName: new FormControl(''),
-    UserName: new FormControl(''),
-    Password: new FormControl(''),
-    ConfirmPassword: new FormControl('')
-  });
+  signupForm:FormGroup;
 
-  constructor(private toastr : ToastrService , private http : HttpClient) { }
+  constructor(private toastr : ToastrService , private http : HttpClient,
+    private router : Router) { }
 
   ngOnInit(): void {
+    this.initFormControl();
+  }
+
+  initFormControl(){
+    this.signupForm = new FormGroup({
+      FirstName : new FormControl(null),
+      LastName : new FormControl(null),
+      Email: new FormControl(null , [Validators.required , Validators.email]),
+      Mobile: new FormControl(null , [Validators.required , Validators.minLength(11)]),
+      UserName : new FormControl(null ,  Validators.required),
+      Password : new FormControl(null , [Validators.required , Validators.minLength(8)]),
+      ConfirmPassword : new FormControl(null , [Validators.required])
+    } , this.passMatchValidator);
+  }
+
+  passMatchValidator(fg : FormGroup): Validators{
+    return fg.get('Password').value == fg.get('ConfirmPassword').value ? null:
+    {notmatched: true}
   }
 
   onSubmit(){
-    if(this.signupForm.value.Password != this.signupForm.value.ConfirmPassword){
-      this.toastr.error("Password not matched!");
-      return;
-    }
-
     const Credential = {
       "FirstName": this.signupForm.value.FirstName,
       "LastName": this.signupForm.value.LastName,
@@ -43,6 +52,7 @@ export class UserSignupComponent implements OnInit {
         sessionStorage.removeItem('loggedUser');
         sessionStorage.setItem('loggedUser' , Credential.UserName);
 
+        this.router.navigate(['/']);
         window.location.reload();
         this.toastr.success('Welcome '+ Credential.UserName);
       }, err => {

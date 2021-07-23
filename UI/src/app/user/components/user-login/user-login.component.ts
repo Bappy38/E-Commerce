@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -11,15 +11,20 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
-  loginForm = new FormGroup({
-    UserName: new FormControl(''),
-    Password: new FormControl('')
-  });
+  loginForm: FormGroup;
 
   constructor(private http : HttpClient , private toastr : ToastrService,
     private router : Router , private jwtHelper : JwtHelperService) { }
 
   ngOnInit(): void {
+    this.initLoginFormControl();
+  }
+
+  initLoginFormControl(){
+    this.loginForm = new FormGroup({
+      UserName: new FormControl(null , [Validators.required]),
+      Password: new FormControl(null , [Validators.required])
+    });
   }
 
   onSubmit(){
