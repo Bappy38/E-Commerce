@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { browser } from 'protractor';
 
 @Component({
   selector: 'app-user-login',
@@ -41,7 +42,7 @@ export class UserLoginComponent implements OnInit {
         sessionStorage.removeItem('loggedUser');
         sessionStorage.setItem('loggedUser' , Credential.UserName);
 
-        this.router.navigate(['']);
+        window.location.reload();
         this.toastr.success('Welcome '+ Credential.UserName);
       }, err => {
         this.toastr.error('Username and password did not match');

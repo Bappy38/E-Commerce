@@ -46,4 +46,11 @@ export class UserNavComponent implements OnInit {
     this.router.navigate(['user-signup']);
   }
 
+  gotoChangePass(){
+    this.router.navigate(['user-changepass']);
+  }
+
+  gotoUserProfile(){
+    this.router.navigate(['user-profile']);
+  }
 }

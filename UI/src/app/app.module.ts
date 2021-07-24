@@ -28,6 +28,9 @@ import { UserHomeComponent } from './user/components/user-home/user-home.compone
 import { UserNavComponent } from './user/components/user-nav/user-nav.component';
 import { UserLoginComponent } from './user/components/user-login/user-login.component';
 import { UserSignupComponent } from './user/components/user-signup/user-signup.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserChangepassComponent } from './user/components/user-changepass/user-changepass.component';
+import { UserProfileComponent } from './user/components/user-profile/user-profile.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -49,7 +52,9 @@ export function tokenGetter(){
     UserHomeComponent,
     UserNavComponent,
     UserLoginComponent,
-    UserSignupComponent
+    UserSignupComponent,
+    UserChangepassComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,8 @@ export function tokenGetter(){
         allowedDomains: ["localhost:5001"],
         disallowedRoutes: []
       }
-    })
+    }),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

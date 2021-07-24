@@ -21,12 +21,18 @@ namespace WebAPI.Services
             _users = database.GetCollection<User>(setting.UserCollectionName);
         }
 
+        //Get an specific user through username
         public User Get(string userName) => _users.Find<User>(user =>
         user.UserName == userName).FirstOrDefault();
 
+        //Add a new user
         public void Post(User user)
         {
             _users.InsertOne(user);
         }
+
+        //Update user detail
+        public void Put(User updatedUser) =>
+            _users.ReplaceOne(user => user.UserName == updatedUser.UserName, updatedUser);
     }
 }

@@ -105,5 +105,23 @@ namespace WebAPI.Controllers
 
             return userSignIn(cred);
         }
+
+        //Update User Detail
+        [HttpPut , Route("userdetail-update")]
+        public IActionResult UpdateUserDetail([FromBody]User updatedUser)
+        {
+            _authService.Put(updatedUser);
+            return Ok();
+        }
+
+        //Get an specific user
+        [HttpPost , Route("query-user")]
+        public ActionResult<User> GetUser([FromBody]User user)
+        {
+            User ret = _authService.Get(user.UserName);
+            if (ret == null)
+                return NotFound();
+            return ret;
+        }
     }
 }

@@ -1,0 +1,33 @@
+<app-user-nav></app-user-nav>
+<div class="row" style="margin-top: 100px;">
+    <div class="col-6 m-auto">
+        <div class="card m-auto">
+            <div class="card-header">
+                Change Password
+            </div>
+            <div class="card-body">
+                <form [formGroup]="changePassForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group col-12 mb-4">
+                        <label for="CurrPass" class="form-label">Current Password</label>
+                        <input type="password" class="form-control" formControlName="CurrPass" placeholder="Enter your current password">
+                    </div>
+
+                    <div class="form-group col-12 mb-4">
+                        <label for="NewPass" class="form-label">New Password</label>
+                        <input type="password" class="form-control" placeholder="Enter your new password" formControlName="NewPass">
+                    </div>
+
+                    <div class="form-group col-12 mb-4">
+                        <label for="ConfirmNewPass" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" placeholder="Repeat your new password" formControlName="ConfirmNewPass">
+                    </div>
+
+                    <div class="form-group col-12">
+                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary ml-2" [disabled]="!changePassForm.valid">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

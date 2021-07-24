@@ -8,6 +8,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatListModule} from '@angular/material/list';
 
 const MaterialComponent = [
   MatButtonModule,
@@ -17,7 +18,8 @@ const MaterialComponent = [
   MatToolbarModule,
   MatDialogModule,
   MatCardModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatListModule
 ]
 
 @NgModule({
