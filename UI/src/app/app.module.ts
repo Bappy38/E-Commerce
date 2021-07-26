@@ -31,6 +31,7 @@ import { UserSignupComponent } from './user/components/user-signup/user-signup.c
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserChangepassComponent } from './user/components/user-changepass/user-changepass.component';
 import { UserProfileComponent } from './user/components/user-profile/user-profile.component';
+import { UserPdetailComponent } from './user/components/user-pdetail/user-pdetail.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -54,7 +55,8 @@ export function tokenGetter(){
     UserLoginComponent,
     UserSignupComponent,
     UserChangepassComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserPdetailComponent
   ],
   imports: [
     BrowserModule,

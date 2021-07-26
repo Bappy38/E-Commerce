@@ -1,17 +1,17 @@
-.card:hover img{
+.card :hover img{
     transform: scale(1.2 , 1.2);
     transition-duration: 500ms;
     transition-timing-function: ease-out;
-    height: 200px;
-    width: 16rem;
+    height: 300px;
+    width: 20rem;
 }
 
 .card img{
     transform: scale(1 , 1);
     transition-duration: 500ms;
     transition-timing-function: ease-out;
-    height: 200px;
-    width: 16rem;
+    height: 300px;
+    width: 20rem;
 }
 
 .img-wrapper{
@@ -36,3 +36,24 @@ a {
   a:hover {
       color: blue;
   }
+
+  .star {
+    position: relative;
+    display: inline-block;
+    font-size: 2rem;
+    color: #d3d3d3;
+  }
+
+  .full {
+    color: blue;
+  }
+
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: blue;
+  }
+  
+    #element1 {display:inline-block;margin-right:10px;} 
+    #element2 {display:inline-block;} 

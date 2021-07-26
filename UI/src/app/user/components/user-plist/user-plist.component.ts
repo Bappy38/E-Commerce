@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { ProductService } from '../../services/product.service';
+import { iProduct } from '../../model/iProduct';
 
 @Component({
   selector: 'app-user-plist',
@@ -7,18 +9,19 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
   styleUrls: ['./user-plist.component.css']
 })
 export class UserPlistComponent implements OnInit {
-  prodList:any;
+  prodList: iProduct[];
   totProd:number;
   page:number = 1;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient , private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.http.get("https://localhost:5001/api/product/query")
-      .subscribe(response => {
-        this.prodList = response;
-      })
-    this.totProd = this.prodList.length;
+    this.productService.getAllProduct().subscribe(response => {
+      this.prodList = response;
+      this.totProd = this.prodList.length;
+    }, err=> {
+      console.log("Can't call product service!");
+    });
     this.page = 1;
   }
 

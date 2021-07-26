@@ -5,8 +5,8 @@
                 <img class="card-img-top" src="{{product.pImage}}">
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{product.pName}}</h5>
-                <p class="card-text">{{product.pPrice}} Tk Per {{product.pUnit}}</p>
+                <h5 class="card-title"><a routerLink="/product-detail/{{product.id}}">{{product.pName}}</a></h5>
+                <p class="card-text"><b>{{product.pPrice}} Tk Per {{product.pUnit}}</b></p>
             </div>
         </div>
     </div>

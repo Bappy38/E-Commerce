@@ -1,0 +1,57 @@
+<app-user-nav></app-user-nav>
+<br><br><br>
+<div class="row shadow">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="img-wrapper">
+                            <img class="card-img-top" src="{{product.pImage}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <h3>{{product.pName}}</h3>
+
+                        <ng-template #t let-fill="fill">
+                            <span class="star" [class.full]="fill === 100">
+                              <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                            </span>
+                        </ng-template>
+                          
+                        <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                        <pre>Rating: <b>{{currentRate}}</b></pre>
+                        <hr>
+                        <h4 style="color: orange;"> ৳ {{product.pPrice}} Per {{product.pUnit}}</h4>
+                        Available: {{product.pQuantity}} {{product.pUnit}} <br><br>
+
+                        
+                        <div class="btn-group" style="height: 30px;">
+                            Quantity
+                            <button style="margin-left: 20px;" (click)="toggleLess()">
+                                <mat-icon>
+                                    <span class="material-icons">remove</span>
+                                </mat-icon>
+                            </button>
+                            <input type="number" style="margin-left: 10px; margin-right: 10px;" [(value)]="Cnt">
+                            <button (click)="toggleMore()">
+                                <mat-icon>
+                                    <span class="material-icons">add</span>
+                                </mat-icon>
+                            </button>
+                        </div>
+
+                        <div style="margin-top: 30px;">
+                            <button class="btn btn-primary" style="width: 200px;" (click)="addToCart()">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <!--Here we will add a tab to show description, detail and review-->
+    </div>
+</div>
