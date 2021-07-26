@@ -15,16 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserPdetailComponent implements OnInit {
   productOrder: string;
-  product: iProduct = {
-    id: "dummy-id",
-    pOrder: 1,
-    pName: "Apple",
-    pPrice: 180,
-    pUnit: "Kg",
-    pQuantity: 5,
-    pImage: "https://drive.google.com/thumbnail?id=1jvL8Ge0WVW1bwyWLLKrNUlwoQlIhHhWf",
-    pDescription: "abcd"
-  };
+  product: iProduct;
   currentRate:number = 4.5;
   Cnt:number;
 
@@ -36,24 +27,20 @@ export class UserPdetailComponent implements OnInit {
   ngOnInit(): void {
     this.productOrder = this.route.snapshot.params['id'];
 
-    /* Uncomment this http request after finishing this components work
+    
     this.productService.getProduct(this.productOrder).subscribe(response => {
       this.product = response;
-      console.log(this.product);
     });
-    */
     this.Cnt = 1;
   }
 
   toggleMore(){
     if(this.Cnt < this.product.pQuantity)
       this.Cnt++;
-    console.log("Increased!");
   }
   toggleLess(){
     if(this.Cnt > 1)
       this.Cnt--;
-    console.log("Decreased!");
   }
 
   isloggedIn(){
@@ -74,10 +61,12 @@ export class UserPdetailComponent implements OnInit {
   }
 
   addToCart(){
+    console.log(this.Cnt);
     if(!this.isloggedIn())
       this.openLoginDialog();
     if(this.Cnt > this.product.pQuantity){
       this.toastr.error("Sorry! You can order "+ this.product.pQuantity + " " + this.product.pUnit + " only!");
+      return;
     }
   }
 }

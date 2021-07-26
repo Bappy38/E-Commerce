@@ -12,6 +12,10 @@ export class UserPlistComponent implements OnInit {
   prodList: iProduct[];
   totProd:number;
   page:number = 1;
+  searchProduct:string = '';
+  selectedProduct:string = '';
+  SortByParam: string = '';
+  SortDirection: string = 'asc';
 
   constructor(private http : HttpClient , private productService: ProductService) { }
 
@@ -25,4 +29,21 @@ export class UserPlistComponent implements OnInit {
     this.page = 1;
   }
 
+  onProductFilter(){
+    this.searchProduct = this.selectedProduct;
+  }
+
+  onProductFilterClear(){
+    this.searchProduct = '';
+    this.selectedProduct = '';
+  }
+
+  onSortDirection(){
+    if(this.SortDirection == 'asc'){
+      this.SortDirection = 'desc';
+    }
+    else{
+      this.SortDirection = 'asc';
+    }
+  }
 }

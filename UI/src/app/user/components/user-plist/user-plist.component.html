@@ -1,6 +1,31 @@
+<div class="row" style="margin-bottom: 25px; margin-top: 20px;">
+    <div class="col-sm-9">
+        <div class="btn-group">
+            <input [(ngModel)]='selectedProduct' placeholder="Search For a Product">
+            <button type="button" class="btn btn-outline-info" (click)="onProductFilter()">Search</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="onProductFilterClear()">Clear</button>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="btn-group">
+            <label style="margin-top: 8px;">Sort By &nbsp;</label>
+            <select [(ngModel)] = 'SortByParam'>
+                <option value="pName">Product Name</option>
+                <option value="pPrice">Price</option>
+            </select>
+            <button type="button" (click) = "onSortDirection()">
+                <mat-icon>
+                    <span *ngIf="SortDirection === 'asc'" class="material-icons-outlined">arrow_circle_up</span>
+                    <span *ngIf="SortDirection === 'desc'" class="material-icons-outlined">arrow_circle_down</span>
+                </mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div *ngFor = "let item of prodList | paginate: {itemsPerPage:8 , 
-        currentPage: page , totalLength: totProd}" 
+        currentPage: page , totalLength: totProd} | filter:searchProduct:'pName' | sort:[SortByParam , SortDirection] " 
         class="shadow-lg col-sm-3 p-3">
 
         <app-user-pcard [product]="item"></app-user-pcard>

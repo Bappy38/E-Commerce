@@ -32,6 +32,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserChangepassComponent } from './user/components/user-changepass/user-changepass.component';
 import { UserProfileComponent } from './user/components/user-profile/user-profile.component';
 import { UserPdetailComponent } from './user/components/user-pdetail/user-pdetail.component';
+import { FilterPipe } from './Pipes/filter.pipe';
+import { SortPipe } from './Pipes/sort.pipe';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -56,7 +58,9 @@ export function tokenGetter(){
     UserSignupComponent,
     UserChangepassComponent,
     UserProfileComponent,
-    UserPdetailComponent
+    UserPdetailComponent,
+    FilterPipe,
+    SortPipe
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,7 @@ export function tokenGetter(){
     NgbModule,
     HttpClientModule,
     NgxPaginationModule,
+    FormsModule,
     ToastrModule.forRoot({
       timeOut:3000,
       progressBar:true,
