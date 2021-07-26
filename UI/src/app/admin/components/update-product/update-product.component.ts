@@ -31,6 +31,20 @@ export class UpdateProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  processDriveLink(link:string):string
+  {
+    var reqUrl:string = 'https://drive.google.com/thumbnail?id=';
+    var cnt:number = 0;
+
+    for(var char of link){
+      if(char == '/')
+        cnt++;
+      if(cnt == 5 && char != '/')
+        reqUrl += char;
+    }
+    return reqUrl;
+  }
+
   onSubmit(){
     const updatedProduct = {
       'pOrder' : this.newProductForm.value.pOrder,
@@ -38,7 +52,7 @@ export class UpdateProductComponent implements OnInit {
       'pPrice' : this.newProductForm.value.pPrice,
       'pUnit' : this.newProductForm.value.pUnit,
       'pQuantity' : this.newProductForm.value.pQuantity,
-      'pImage' : this.newProductForm.value.pImage,
+      'pImage' : this.processDriveLink(this.newProductForm.value.pImage),
       'pDescription': this.newProductForm.value.pDescription
     }
 
