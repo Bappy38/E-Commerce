@@ -34,6 +34,7 @@ import { UserProfileComponent } from './user/components/user-profile/user-profil
 import { UserPdetailComponent } from './user/components/user-pdetail/user-pdetail.component';
 import { FilterPipe } from './Pipes/filter.pipe';
 import { SortPipe } from './Pipes/sort.pipe';
+import { UserCartComponent } from './user/components/user-cart/user-cart.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -60,7 +61,8 @@ export function tokenGetter(){
     UserProfileComponent,
     UserPdetailComponent,
     FilterPipe,
-    SortPipe
+    SortPipe,
+    UserCartComponent
   ],
   imports: [
     BrowserModule,

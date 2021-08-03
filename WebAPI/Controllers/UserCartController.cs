@@ -20,10 +20,10 @@ namespace WebAPI.Controllers
         }
 
         //Get cart of a specific user
-        [HttpGet , Route("query")]
-        public ActionResult<UserCart> GetUserCart(string userName)
+        [HttpPost , Route("query")]
+        public ActionResult<UserCart> GetUserCart([FromBody] SignIn user)
         {
-            UserCart cart = _userCartService.Get(userName);
+            UserCart cart = _userCartService.Get(user.UserName);
 
             if (cart == null)
                 return NotFound();
@@ -57,15 +57,13 @@ namespace WebAPI.Controllers
         }
 
         //Delete an usercart
-        [HttpDelete , Route("delete")]
+        [HttpPost , Route("delete")]
         public IActionResult RemoveUserCart([FromBody]UserCart cart)
         {
             _userCartService.Delete(cart);
 
             //Push an empty cart after cleaning a cart
-            UserCart dummyCart = new UserCart();
-            dummyCart.UserName = cart.UserName;
-            _userCartService.Post(dummyCart);
+            _userCartService.Post(cart);
             return Ok();
         }
     }

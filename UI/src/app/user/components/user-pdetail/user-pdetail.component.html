@@ -6,11 +6,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-4">
-                        <div class="img-wrapper">
+                        <div class="img-wrapper" *ngIf="product && product.pImage">
                             <img class="card-img-top" src="{{product.pImage}}">
                         </div>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7" *ngIf="product">
                         <h3>{{product.pName}}</h3>
 
                         <ng-template #t let-fill="fill">

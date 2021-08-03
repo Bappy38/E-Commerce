@@ -1,11 +1,15 @@
-<h2 mat-dialog-title style="color: red;">{{data.title}}</h2>
+<div class="row">
+    <div class="col">
+        <h2 mat-dialog-title>{{data.title}}</h2>
 
-<mat-dialog-content>{{data.content}}</mat-dialog-content>
+        <mat-dialog-content>{{data.content}}</mat-dialog-content>
 
-<mat-dialog-actions>
-    <button mat-button mat-dialog-close mat-dialog-close="false"
-    style="color: green;">No</button>
+        <mat-dialog-actions>
+            <button mat-button mat-dialog-close mat-dialog-close="false"
+            style="color: green;">No</button>
 
-    <button mat-button mat-dialog-close mat-dialog-close="true"
-    style="color: red;">Yes</button>
-</mat-dialog-actions>
+            <button mat-button mat-dialog-close mat-dialog-close="true"
+            style="color: red;">Yes</button>
+        </mat-dialog-actions>
+    </div>
+</div>

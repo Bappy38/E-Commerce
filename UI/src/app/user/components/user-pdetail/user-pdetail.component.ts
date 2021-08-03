@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { iProduct } from '../../model/iProduct';
+import { iUserCart } from '../../model/iUserCart';
 import { ProductService } from '../../services/product.service';
+import { UserCartService } from '../../services/user-cart.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatDialog } from '@angular/material/dialog';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +25,8 @@ export class UserPdetailComponent implements OnInit {
 
   constructor(private route : ActivatedRoute, private productService : ProductService,
     private jwtHelper : JwtHelperService, private dialog: MatDialog , 
-    private toastr : ToastrService) { }
+    private toastr : ToastrService , private userCartService: UserCartService,
+    private router : Router) { }
 
   ngOnInit(): void {
     this.productOrder = this.route.snapshot.params['id'];
@@ -68,5 +72,17 @@ export class UserPdetailComponent implements OnInit {
       this.toastr.error("Sorry! You can order "+ this.product.pQuantity + " " + this.product.pUnit + " only!");
       return;
     }
+
+    let orderedProduct : any = this.product;
+    orderedProduct.pQuantity = this.Cnt;
+
+    this.userCartService.addProduct(orderedProduct).then(
+      (val) => {
+        this.toastr.success('Product added to cart successfully!');
+      },
+      (err) => {
+        this.toastr.error('Add product to cart unsuccessfull!');
+      }
+    )
   }
 }

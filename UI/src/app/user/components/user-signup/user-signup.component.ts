@@ -3,6 +3,7 @@ import { FormGroup , FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { iUserCart } from '../../model/iUserCart';
 
 @Component({
   selector: 'app-user-signup',
@@ -26,7 +27,7 @@ export class UserSignupComponent implements OnInit {
       Email: new FormControl(null , [Validators.required , Validators.email]),
       Mobile: new FormControl(null , [Validators.required , Validators.minLength(11)]),
       UserName : new FormControl(null ,  Validators.required),
-      Password : new FormControl(null , [Validators.required , Validators.minLength(8)]),
+      Password : new FormControl(null , [Validators.required]),
       ConfirmPassword : new FormControl(null , [Validators.required])
     } , this.passMatchValidator);
   }
@@ -44,6 +45,11 @@ export class UserSignupComponent implements OnInit {
       "Password": this.signupForm.value.Password
     }
 
+    const userCart = {
+      "UserName": this.signupForm.value.UserName,
+      "OrderedProductList":[]
+    }
+
     this.http.post("https://localhost:5001/api/auth/user-signup" , Credential)
       .subscribe(response => {
         const token = (<any>response).token;
@@ -52,9 +58,15 @@ export class UserSignupComponent implements OnInit {
         sessionStorage.removeItem('loggedUser');
         sessionStorage.setItem('loggedUser' , Credential.UserName);
 
-        this.router.navigate(['/']);
-        window.location.reload();
-        this.toastr.success('Welcome '+ Credential.UserName);
+        this.http.post("https://localhost:5001/api/usercart/add", userCart)
+        .subscribe(response => {
+            this.router.navigate(['**']);
+            window.location.reload();
+            this.toastr.success('Welcome '+ Credential.UserName);
+        }, err=> {
+          console.error("Can't add an empty user cart");
+        });
+
       }, err => {
         this.toastr.error('Username already exist! Try with another one.');
       });

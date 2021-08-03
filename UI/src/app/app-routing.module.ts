@@ -11,6 +11,7 @@ import { UserSignupComponent } from './user/components/user-signup/user-signup.c
 import { UserChangepassComponent } from './user/components/user-changepass/user-changepass.component';
 import { UserProfileComponent } from './user/components/user-profile/user-profile.component';
 import { UserPdetailComponent } from './user/components/user-pdetail/user-pdetail.component';
+import { UserCartComponent } from './user/components/user-cart/user-cart.component';
 
 const routes: Routes = [
   {path: 'add-product' , component: AddProductComponent , canActivate:[AdminAuthGuardService]},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'user-signup' , component: UserSignupComponent},
   {path: 'user-changepass' , component: UserChangepassComponent},
   {path: 'user-profile' , component: UserProfileComponent},
-  {path: 'product-detail/:id' , component: UserPdetailComponent}
+  {path: 'product-detail/:id' , component: UserPdetailComponent},
+  {path: 'user-cart' , component: UserCartComponent}
 ];
 
 @NgModule({
