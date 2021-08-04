@@ -65,9 +65,10 @@ export class UserPdetailComponent implements OnInit {
   }
 
   addToCart(){
-    console.log(this.Cnt);
-    if(!this.isloggedIn())
+    if(!this.isloggedIn()){
       this.openLoginDialog();
+      return;
+    }
     if(this.Cnt > this.product.pQuantity){
       this.toastr.error("Sorry! You can order "+ this.product.pQuantity + " " + this.product.pUnit + " only!");
       return;

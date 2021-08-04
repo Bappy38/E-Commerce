@@ -4,9 +4,10 @@ import { UserCartService } from '../../services/user-cart.service';
 import { HttpClient } from '@angular/common/http';
 import { iProduct } from '../../model/iProduct';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
 import { YesNoDialogComponent } from 'src/app/common/yes-no-dialog/yes-no-dialog.component';
-import { MatDialogConfig } from '@angular/material/dialog';
+import { UserPlaceorderComponent } from '../user-placeorder/user-placeorder.component';
+import { iOrder } from '../../model/iOrder';
 
 @Component({
   selector: 'app-user-cart',
@@ -36,7 +37,6 @@ export class UserCartComponent implements OnInit {
       this.myCart = <iUserCart>response;
       if(this.myCart && this.myCart.orderedProductList && this.myCart.orderedProductList.length > 0){
         this.totalCost = 40;
-        console.log('Hi!!!');
 
         for(let item of this.myCart.orderedProductList){
           this.totalCost += (item.pPrice * item.pQuantity);
@@ -95,6 +95,31 @@ export class UserCartComponent implements OnInit {
         this.clearCart();
       }
     });
+  }
+
+  placeOrderDialog(){
+    const dialogRef = this.dialog.open(UserPlaceorderComponent , {
+      width: '600px',
+      height: '440px',
+      data: this.myCart.orderedProductList
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.event == 'Submit'){
+        let order : iOrder = <iOrder>result.data;
+        order.TotalCost = this.totalCost;
+        console.log(order);
+
+        this.http.post("https://localhost:5001/api/order/add" , order)
+          .subscribe(response => {
+            this.toastr.success("Your order have been placed successfully!");
+            this.clearCart();
+        }, err => {
+          this.toastr.error("There was an error to place the order!");
+        });
+      }
+    });
+
   }
 
 }

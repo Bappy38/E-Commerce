@@ -53,4 +53,11 @@ export class UserNavComponent implements OnInit {
   gotoUserProfile(){
     this.router.navigate(['user-profile']);
   }
+
+  gotoCart(){
+    if(this.isUserAuthenticated())
+      this.router.navigate(['/user-cart']);
+    else
+      this.openLoginDialog();
+  }
 }

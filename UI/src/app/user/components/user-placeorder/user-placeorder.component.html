@@ -1,0 +1,31 @@
+<mat-card style="background-color:rgb(241, 245, 245); height: 100%; width: 100%;">
+    <mat-card-header>
+        <h5>Confirm your order</h5>
+    </mat-card-header>
+
+    <mat-card-content style="margin-top: 20px;">
+        <form [formGroup]="orderForm">
+            <mat-form-field appearance="outline" class="field" style="width: 100%;">
+                <mat-label>Order No</mat-label>
+                <input readonly matInput formControlName="OrderNo">
+            </mat-form-field><br>
+    
+            <mat-form-field appearance="outline" class="field" style="width: 100%;">
+                <mat-label>Address</mat-label>
+                <input matInput placeholder="Enter the delivery address:" formControlName="Address">
+            </mat-form-field><br>
+    
+            <mat-form-field appearance="outline" class="field" style="width: 100%;">
+                <mat-label>Contact No</mat-label>
+                <input matInput placeholder="Enter your phone number" formControlName="ContactNo">
+            </mat-form-field><br>
+    
+            
+            <div class="btn-group">
+                <button class="btn btn-outline-info" (click) = "closeDialog()">Cancel</button>
+                <button class="btn btn-outline-success"
+                [disabled]="!orderForm.valid" (click)="onSubmit()">Place Order</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
