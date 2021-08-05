@@ -60,4 +60,11 @@ export class UserNavComponent implements OnInit {
     else
       this.openLoginDialog();
   }
+
+  gotoOrder(){
+    if(this.isUserAuthenticated())
+      this.router.navigate(['my-order']);
+    else
+      this.openLoginDialog();
+  }
 }

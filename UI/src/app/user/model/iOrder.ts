@@ -8,4 +8,4 @@ export interface iOrder{
     Contact: string,
     OrderedProductList: iProduct,
     TotalCost: number
-}
+} 

@@ -1,8 +1,8 @@
 <app-user-nav></app-user-nav>
 <br><br><br>
-<div class="row" style="width: 50%; margin: 0 auto;" *ngIf="myCart && myCart.orderedProductList && myCart.orderedProductList.length > 0">
+<div class="row" style="width: 50%; margin: 0 auto; min-height: 95%;" *ngIf="myCart && myCart.orderedProductList && myCart.orderedProductList.length > 0">
     <div class="col">
-        <table class="table table-hover">
+        <table class="table table-hover" border="2px">
             <thead>
               <tr style="background-color: tan;">
                 <th scope="col">Product</th>
@@ -83,3 +83,4 @@
         </table>
     </div>
 </div>
+<app-footer></app-footer>

@@ -9,6 +9,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const MaterialComponent = [
   MatButtonModule,
@@ -19,7 +20,8 @@ const MaterialComponent = [
   MatDialogModule,
   MatCardModule,
   MatPaginatorModule,
-  MatListModule
+  MatListModule,
+  MatExpansionModule
 ]
 
 @NgModule({

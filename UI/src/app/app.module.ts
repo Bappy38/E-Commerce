@@ -36,6 +36,9 @@ import { FilterPipe } from './Pipes/filter.pipe';
 import { SortPipe } from './Pipes/sort.pipe';
 import { UserCartComponent } from './user/components/user-cart/user-cart.component';
 import { UserPlaceorderComponent } from './user/components/user-placeorder/user-placeorder.component';
+import { UserOrderComponent } from './user/components/user-order/user-order.component';
+import { FilterOrderPipe } from './Pipes/filter-order.pipe';
+import { FooterComponent } from './common/footer/footer.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -64,7 +67,10 @@ export function tokenGetter(){
     FilterPipe,
     SortPipe,
     UserCartComponent,
-    UserPlaceorderComponent
+    UserPlaceorderComponent,
+    UserOrderComponent,
+    FilterOrderPipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

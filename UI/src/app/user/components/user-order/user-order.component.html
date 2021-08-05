@@ -1,0 +1,96 @@
+<app-user-nav></app-user-nav>
+<br><br><br>
+
+<div style="min-height: 450px;">
+    <mat-accordion>
+        <div *ngFor="let order of orderList | filterOrder : loggedUser : 'userName' " class="container">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                <mat-panel-title>
+                    OrderNo : {{order.orderNo}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    Click here to see the details
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                
+                <br><br>
+                <div class="row">
+                    <div class="col col-sm-8">
+                        <h5>Order Details</h5><br>
+                        <table class="table table-hover" border="2px">
+                            <thead>
+                              <tr style="background-color: tan;">
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of order.orderedProductList">
+                                <td>{{item.pName}}</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <span>{{item.pPrice}}</span>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <span> x </span>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <span>{{item.pQuantity}}</span>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <span> = </span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <span>{{item.pPrice * item.pQuantity}} Tk</span>
+                                        </div>
+                                    </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                  <td>Delivery Charge</td>
+                                  <td>
+                                    <div class="row">
+                                        <div class="col-sm-5"></div>
+                                        <div class="col-sm-1"> = </div>
+                                        <div class="col-sm-3">40 Tk</div>
+                                    </div>
+                                  </td>
+                              </tr>
+                              <tr style="background-color:skyblue">
+                                  <td>Total</td>
+                                  <td>
+                                    <div class="row">
+                                        <div class="col-sm-5"></div>
+                                        <div class="col-sm-1"> = </div>
+                                        <div class="col-sm-3">{{order.totalCost}} Tk</div>
+                                    </div>
+                                  </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="col col-sm-4">
+                        <mat-card>
+                            <mat-card-title>
+                                <h5>Delivery Information</h5><br>
+                            </mat-card-title>
+                            <mat-card-content>
+                                <h6>Username : {{order.userName}}</h6>
+                                <h6 style="margin-top: 10px;">Contact No: {{order.contact}}</h6>
+                                <h6 style="margin-top: 10px;">Address: {{order.address}}</h6>
+                                <h6 style="margin-top: 20px; color: darkcyan;">Order Status: Ready for shipping</h6>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-raised-button color="primary">Download Invoice</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                </div>
+    
+            </mat-expansion-panel>
+        </div>
+    </mat-accordion>
+</div>
+<app-footer></app-footer>
