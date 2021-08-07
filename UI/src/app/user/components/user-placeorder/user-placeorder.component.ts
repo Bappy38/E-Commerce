@@ -15,7 +15,8 @@ export class UserPlaceorderComponent implements OnInit {
   orderForm : FormGroup;
   orderedProductList: any;
 
-  constructor(public dialogRef : MatDialogRef<UserPlaceorderComponent>,
+  constructor(
+              public dialogRef : MatDialogRef<UserPlaceorderComponent>,
               @Inject(MAT_DIALOG_DATA)public data : any) {
     this.orderedProductList = data;
 }
@@ -34,6 +35,7 @@ export class UserPlaceorderComponent implements OnInit {
 
   onSubmit()
   {
+    let currDate = new Date();
     let order: iOrder = {
       id: null,
       OrderNo : this.orderForm.value.OrderNo,
@@ -41,9 +43,11 @@ export class UserPlaceorderComponent implements OnInit {
       Address : this.orderForm.value.Address,
       Contact : this.orderForm.value.ContactNo,
       OrderedProductList : this.orderedProductList,
+      OrderDate: currDate.toLocaleDateString() + ' ' + currDate.toLocaleTimeString(),
       TotalCost: 0
     }
     this.dialogRef.close({event: 'Submit' , data: order});
+    console.log(order);
   }
 
   closeDialog(){

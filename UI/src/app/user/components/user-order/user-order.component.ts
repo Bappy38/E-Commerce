@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { iOrder } from '../../model/iOrder';
 import { HttpClient } from '@angular/common/http';
+import { PdfExportService } from '../../services/pdf-export.service';
 
 @Component({
   selector: 'app-user-order',
@@ -11,8 +12,9 @@ export class UserOrderComponent implements OnInit {
   orderList : iOrder[];
   panelOpenState = false;
   loggedUser: String;
+  emptyOrder: boolean = true;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private invoice : PdfExportService) { }
 
   ngOnInit(): void {
     this.initData();
@@ -25,6 +27,10 @@ export class UserOrderComponent implements OnInit {
         this.orderList = <iOrder[]>response;
     });
     this.loggedUser = sessionStorage.getItem('loggedUser');
+  }
+
+  invoicePrint(order: any){
+    this.invoice.exportPDF(order);
   }
 
 }

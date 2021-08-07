@@ -15,6 +15,7 @@ import { UserCartComponent } from './user/components/user-cart/user-cart.compone
 import { UserPlaceorderComponent } from './user/components/user-placeorder/user-placeorder.component';
 import { UserAuthGuardService } from './user/services/user-auth-guard.service';
 import { UserOrderComponent } from './user/components/user-order/user-order.component';
+import { CustomerCareComponent } from './user/components/customer-care/customer-care.component';
 
 const routes: Routes = [
   {path: 'add-product' , component: AddProductComponent , canActivate:[AdminAuthGuardService]},
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path: 'user-profile' , component: UserProfileComponent},
   {path: 'product-detail/:id' , component: UserPdetailComponent},
   {path: 'user-cart' , component: UserCartComponent , canActivate: [UserAuthGuardService]},
-  {path: 'my-order' , component: UserOrderComponent , canActivate: [UserAuthGuardService]}
+  {path: 'my-order' , component: UserOrderComponent , canActivate: [UserAuthGuardService]},
+  {path: 'customer-care' , component: CustomerCareComponent}
 ];
 
 @NgModule({

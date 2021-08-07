@@ -39,6 +39,7 @@ import { UserPlaceorderComponent } from './user/components/user-placeorder/user-
 import { UserOrderComponent } from './user/components/user-order/user-order.component';
 import { FilterOrderPipe } from './Pipes/filter-order.pipe';
 import { FooterComponent } from './common/footer/footer.component';
+import { CustomerCareComponent } from './user/components/customer-care/customer-care.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -70,7 +71,8 @@ export function tokenGetter(){
     UserPlaceorderComponent,
     UserOrderComponent,
     FilterOrderPipe,
-    FooterComponent
+    FooterComponent,
+    CustomerCareComponent
   ],
   imports: [
     BrowserModule,
@@ -97,6 +99,7 @@ export function tokenGetter(){
     }),
     FontAwesomeModule
   ],
+  entryComponents: [UserPlaceorderComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

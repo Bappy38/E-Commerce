@@ -67,4 +67,8 @@ export class UserNavComponent implements OnInit {
     else
       this.openLoginDialog();
   }
+
+  gotoCustomerCare(){
+    this.router.navigate(['/customer-care']);
+  }
 }

@@ -1,7 +1,7 @@
 <app-user-nav></app-user-nav>
 <br><br><br>
 
-<div style="min-height: 450px;">
+<div style="min-height: 90%;">
     <mat-accordion>
         <div *ngFor="let order of orderList | filterOrder : loggedUser : 'userName' " class="container">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -16,7 +16,7 @@
                 
                 <br><br>
                 <div class="row">
-                    <div class="col col-sm-8">
+                    <div class="col col-sm-7">
                         <h5>Order Details</h5><br>
                         <table class="table table-hover" border="2px">
                             <thead>
@@ -71,7 +71,7 @@
                             </tbody>
                           </table>
                     </div>
-                    <div class="col col-sm-4">
+                    <div class="col col-sm-5">
                         <mat-card>
                             <mat-card-title>
                                 <h5>Delivery Information</h5><br>
@@ -80,10 +80,11 @@
                                 <h6>Username : {{order.userName}}</h6>
                                 <h6 style="margin-top: 10px;">Contact No: {{order.contact}}</h6>
                                 <h6 style="margin-top: 10px;">Address: {{order.address}}</h6>
+                                <h6 style="margin-top: 10px;">Date Of Order: {{order.orderDate}}</h6>
                                 <h6 style="margin-top: 20px; color: darkcyan;">Order Status: Ready for shipping</h6>
                             </mat-card-content>
                             <mat-card-actions>
-                                <button mat-raised-button color="primary">Download Invoice</button>
+                                <button mat-raised-button color="primary" (click)="invoicePrint(order)">Download Invoice</button>
                             </mat-card-actions>
                         </mat-card>
                     </div>

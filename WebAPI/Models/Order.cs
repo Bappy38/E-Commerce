@@ -15,6 +15,7 @@ namespace WebAPI.Models
         public string UserName { get; set; }
         public string Address { get; set; }
         public string Contact { get; set; }
+        public string OrderDate { get; set; }
         public Product[] OrderedProductList { get; set; }
         public int TotalCost { get; set; }
     }
