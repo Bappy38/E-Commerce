@@ -26,7 +26,11 @@ export class ProductCardComponent implements OnInit {
       content: 'You will lose all your current data regarding this product!'
     };
 
-    let dialogRef = this.dialog.open(YesNoDialogComponent , {data : obj});
+    let dialogRef = this.dialog.open(YesNoDialogComponent , {
+      minWidth: '400px',
+      minHeight: '200px',
+      data : obj
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'true'){

@@ -38,5 +38,7 @@ namespace WebAPI.Services
             _orders.Find(order => true).ToList();
 
         //Update an order
+        public void Put(Order updatedOrder) =>
+            _orders.ReplaceOne(order => order.OrderNo == updatedOrder.OrderNo, updatedOrder);
     }
 }

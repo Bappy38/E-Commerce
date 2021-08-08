@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
         }
 
         //Remove an order
-        [HttpDelete , Route("delete")]
+        [HttpPost , Route("delete")]
         public IActionResult RemoveOrder([FromBody]Order oldOrder)
         {
             _orderService.Delete(oldOrder);
@@ -41,5 +41,11 @@ namespace WebAPI.Controllers
             _orderService.Get();
 
         //Update a order
+        [HttpPut , Route("update")]
+        public IActionResult UpdateOrder([FromBody]Order updatedOrder)
+        {
+            _orderService.Put(updatedOrder);
+            return Ok();
+        }
     }
 }

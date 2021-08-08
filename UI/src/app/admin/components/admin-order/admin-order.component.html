@@ -87,7 +87,7 @@
                                 <form><!--This dropdown doesn't work!-->
                                     <mat-form-field>
                                       <mat-label>Order Status Change</mat-label>
-                                      <mat-select [(ngModel)]="newOrderStatus" (click)="statusChange(order)" name="options">
+                                      <mat-select [(ngModel)]="newOrderStatus" name="options">
                                         <mat-option *ngFor="let option of options" [value]="option.value">
                                           {{option.viewValue}}
                                         </mat-option>
@@ -98,7 +98,12 @@
                             </mat-card-content>
                             <mat-card-actions>
                                 <button mat-raised-button color="primary" (click)="invoicePrint(order)">Download Invoice</button>
-                                <!--Add a button for deleting order-->>
+                                <br>
+                                
+                                <div class="btn-group" style="margin-top: 4%;">
+                                    <button type="button" class="btn btn-outline-info" (click)="statusChange(order)">Save Changes</button>
+                                    <button type="button" class="btn btn-outline-secondary" (click)="removeOrder(order)">Delete Order</button>
+                                </div>
                             </mat-card-actions>
                         </mat-card>
                     </div>

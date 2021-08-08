@@ -88,14 +88,11 @@ export class UserCartComponent implements OnInit {
       content: ''
     };
 
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true,
-    dialogConfig.autoFocus = true,
-    dialogConfig.width = "400px",
-    dialogConfig.height = "200px"
-    dialogConfig.data = obj;
-
-    let dialogRef = this.dialog.open(YesNoDialogComponent , dialogConfig);
+    let dialogRef = this.dialog.open(YesNoDialogComponent , {
+      minWidth: '400px',
+      minHeight: '200px',
+      data : obj
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'true'){
