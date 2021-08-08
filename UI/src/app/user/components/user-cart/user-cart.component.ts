@@ -5,9 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { iProduct } from '../../model/iProduct';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
-import { YesNoDialogComponent } from 'src/app/common/yes-no-dialog/yes-no-dialog.component';
+import { YesNoDialogComponent } from 'src/app/common component/yes-no-dialog/yes-no-dialog.component';
 import { UserPlaceorderComponent } from '../user-placeorder/user-placeorder.component';
 import { iOrder } from '../../model/iOrder';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-user-cart',
@@ -15,6 +16,7 @@ import { iOrder } from '../../model/iOrder';
   styleUrls: ['./user-cart.component.css']
 })
 export class UserCartComponent implements OnInit {
+  existingPList: any;
   myCart: iUserCart;
   totalCost: number = 0;
   User = {
@@ -23,10 +25,15 @@ export class UserCartComponent implements OnInit {
   };
 
   constructor(private cartService: UserCartService, private http : HttpClient,
-              private toastr : ToastrService, private dialog : MatDialog) { }
+              private toastr : ToastrService, private dialog : MatDialog,
+              private prodService: ProductService) { }
 
   ngOnInit(): void {
     this.storeCart();
+    this.prodService.getAllProduct()
+      .subscribe(response => {
+        this.existingPList = response;
+      });
   }
 
   storeCart()
@@ -120,6 +127,22 @@ export class UserCartComponent implements OnInit {
       }
     });
 
+  }
+
+  updateProduct(order: any){  ///This function isn't used yet!
+    for(let item of order.OrderedProductList){
+      let product:any;
+      this.http.post("https://localhost:5001/api/product/single-query" , item)
+        .subscribe(response => {
+          product = response;
+        });
+      
+      product.pQuantity -= item.pQuantity;
+      this.http.post("https://localhost:5001/api/product/update" , item)
+      .subscribe(response => {
+        ///
+      });
+    }
   }
 
 }

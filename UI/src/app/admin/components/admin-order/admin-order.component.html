@@ -1,9 +1,9 @@
-<app-user-nav></app-user-nav>
+<app-admin-nav></app-admin-nav>
 <br><br><br>
 
 <div style="min-height: 90%;">
     <mat-accordion>
-        <div *ngFor="let order of orderList | filterOrder : loggedUser : 'userName' " class="container">
+        <div *ngFor="let order of orderList" class="container">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -82,9 +82,23 @@
                                 <h6 style="margin-top: 10px;">Address: {{order.address}}</h6>
                                 <h6 style="margin-top: 10px;">Date Of Order: {{order.orderDate}}</h6>
                                 <h6 style="margin-top: 20px; color: darkcyan;">Order Status: {{order.orderStatus}}</h6>
+
+                                <br>
+                                <form><!--This dropdown doesn't work!-->
+                                    <mat-form-field>
+                                      <mat-label>Order Status Change</mat-label>
+                                      <mat-select [(ngModel)]="newOrderStatus" (click)="statusChange(order)" name="options">
+                                        <mat-option *ngFor="let option of options" [value]="option.value">
+                                          {{option.viewValue}}
+                                        </mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                </form>
+
                             </mat-card-content>
                             <mat-card-actions>
                                 <button mat-raised-button color="primary" (click)="invoicePrint(order)">Download Invoice</button>
+                                <!--Add a button for deleting order-->>
                             </mat-card-actions>
                         </mat-card>
                     </div>

@@ -16,12 +16,14 @@ import { UserPlaceorderComponent } from './user/components/user-placeorder/user-
 import { UserAuthGuardService } from './user/services/user-auth-guard.service';
 import { UserOrderComponent } from './user/components/user-order/user-order.component';
 import { CustomerCareComponent } from './user/components/customer-care/customer-care.component';
+import { AdminOrderComponent } from './admin/components/admin-order/admin-order.component';
 
 const routes: Routes = [
   {path: 'add-product' , component: AddProductComponent , canActivate:[AdminAuthGuardService]},
   {path: 'admin-home' , component: AdminHomeComponent , canActivate:[AdminAuthGuardService]},
   {path: 'update-product' , component: UpdateProductComponent , canActivate:[UpdateProductComponent]},
   {path: 'admin-login' , component: AdminLoginComponent},
+  {path: 'admin-order' , component: AdminOrderComponent , canActivate:[AdminAuthGuardService]},
 
   {path: '' , component: UserHomeComponent},
   {path: 'user-signup' , component: UserSignupComponent},

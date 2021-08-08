@@ -43,6 +43,7 @@ export class UserPlaceorderComponent implements OnInit {
       Address : this.orderForm.value.Address,
       Contact : this.orderForm.value.ContactNo,
       OrderedProductList : this.orderedProductList,
+      OrderStatus: 'Preparing Order',
       OrderDate: currDate.toLocaleDateString() + ' ' + currDate.toLocaleTimeString(),
       TotalCost: 0
     }

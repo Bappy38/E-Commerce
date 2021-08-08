@@ -19,7 +19,7 @@ import { AddProductComponent } from './admin/components/add-product/add-product.
 import { AdminNavComponent } from './admin/components/admin-nav/admin-nav.component';
 import { AdminHomeComponent } from './admin/components/admin-home/admin-home.component';
 import { ProductCardComponent } from './admin/components/product-card/product-card.component';
-import { YesNoDialogComponent } from './common/yes-no-dialog/yes-no-dialog.component';
+import { YesNoDialogComponent } from './common component/yes-no-dialog/yes-no-dialog.component';
 import { UpdateProductComponent } from './admin/components/update-product/update-product.component';
 import { AdminLoginComponent } from './admin/components/admin-login/admin-login.component';
 import { UserPlistComponent } from './user/components/user-plist/user-plist.component';
@@ -38,8 +38,9 @@ import { UserCartComponent } from './user/components/user-cart/user-cart.compone
 import { UserPlaceorderComponent } from './user/components/user-placeorder/user-placeorder.component';
 import { UserOrderComponent } from './user/components/user-order/user-order.component';
 import { FilterOrderPipe } from './Pipes/filter-order.pipe';
-import { FooterComponent } from './common/footer/footer.component';
+import { FooterComponent } from './common component/footer/footer.component';
 import { CustomerCareComponent } from './user/components/customer-care/customer-care.component';
+import { AdminOrderComponent } from './admin/components/admin-order/admin-order.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -72,7 +73,8 @@ export function tokenGetter(){
     UserOrderComponent,
     FilterOrderPipe,
     FooterComponent,
-    CustomerCareComponent
+    CustomerCareComponent,
+    AdminOrderComponent
   ],
   imports: [
     BrowserModule,

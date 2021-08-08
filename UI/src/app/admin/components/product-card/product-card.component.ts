@@ -1,7 +1,7 @@
 import { Component, OnInit , Input } from '@angular/core';
 
 import {MatDialog , MatDialogConfig} from '@angular/material/dialog';
-import {YesNoDialogComponent} from 'src/app/common/yes-no-dialog/yes-no-dialog.component';
+import {YesNoDialogComponent} from 'src/app/common component/yes-no-dialog/yes-no-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import {HttpClient} from '@angular/common/http';
 import {UpdateProductComponent} from '../update-product/update-product.component';

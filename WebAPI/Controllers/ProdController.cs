@@ -67,5 +67,14 @@ namespace WebAPI.Controllers
         [HttpGet, Route("query")]
         public ActionResult<List<Product>> Get() =>
             _productService.Get();
+
+        //Get specific product
+        [HttpPost , Route("single-query")]
+        public ActionResult<Product> Get([FromBody]Product product)
+        {
+            var prod = _productService.Get(product.pName);
+
+            return prod;
+        }
     }
 }

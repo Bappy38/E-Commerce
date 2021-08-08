@@ -7,6 +7,7 @@ export interface iOrder{
     Address: string,
     Contact: string,
     OrderDate: string,
+    OrderStatus: string,
     OrderedProductList: iProduct,
     TotalCost: number
 } 
