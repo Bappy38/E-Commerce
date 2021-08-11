@@ -23,3 +23,6 @@
   <li>He can add new product</li>
   <li>He can see all the orders that have been placed & can change order status</li>
 </ul>
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z7n2577dbpI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
