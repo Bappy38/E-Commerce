@@ -25,4 +25,8 @@
 </ul>
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/z7n2577dbpI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Preview of application
+
+https://user-images.githubusercontent.com/32066256/129045709-cd17722c-56c1-4094-8b06-0509d2f069b3.mp4
+
