@@ -65,6 +65,17 @@ export class UserPdetailComponent implements OnInit {
   }
 
   addToCart(){
+    const orderedProduct = {
+      id: this.product.id,
+      pOrder: this.product.pOrder,
+      pName: this.product.pName,
+      pPrice: this.product.pPrice,
+      pUnit: this.product.pUnit,
+      pQuantity: this.Cnt,
+      pImage: this.product.pImage,
+      pDescription: this.product.pDescription
+    }
+
     if(!this.isloggedIn()){
       this.openLoginDialog();
       return;
@@ -73,9 +84,6 @@ export class UserPdetailComponent implements OnInit {
       this.toastr.error("Sorry! You can order "+ this.product.pQuantity + " " + this.product.pUnit + " only!");
       return;
     }
-
-    let orderedProduct : any = this.product;
-    orderedProduct.pQuantity = this.Cnt;
 
     this.userCartService.addProduct(orderedProduct).then(
       (val) => {

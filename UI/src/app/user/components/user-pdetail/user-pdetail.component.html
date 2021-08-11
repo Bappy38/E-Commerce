@@ -1,6 +1,6 @@
 <app-user-nav></app-user-nav>
 <br><br><br>
-<div class="row shadow">
+<div class="row" style="min-height: 95%;">
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
@@ -46,12 +46,39 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" style="margin-top: 50px; min-height: 400px;">
+                    <div class="col-sm-12">
+                        <mat-tab-group>
+                            <mat-tab label="Description"> 
+                                <div class="tab">
+                                    <h5>{{product.pDescription}}</h5>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Detail"> 
+                                <div class="tab">
+                                    <h5>We collect all our fruit from garden. So, you can trust us for fresh fruit.</h5>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Review">
+                                <div class="tab">
+                                    <h5>Rating Of The Product:</h5>
+                                    <ng-template #t let-fill="fill">
+                                        <span class="star" [class.full]="fill === 100">
+                                          <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                                        </span>
+                                    </ng-template>
+                                      
+                                    <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                                    <pre>Rating: <b>{{currentRate}}</b></pre>
+
+                                    <h5>Reviewed by 463 customers</h5>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-12">
-        <!--Here we will add a tab to show description, detail and review-->
-    </div>
-</div>
+<app-footer></app-footer>
