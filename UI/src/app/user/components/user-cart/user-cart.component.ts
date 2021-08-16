@@ -70,14 +70,16 @@ export class UserCartComponent implements OnInit {
     );
   }
 
-  clearCart()
+  clearCart(isOrderPlaced:Boolean = false)
   {
     this.myCart.orderedProductList.splice(0 , this.myCart.orderedProductList.length);
     this.http.post("https://localhost:5001/api/usercart/delete", this.myCart)
       .subscribe(reponse => {
-        this.toastr.success("Cart cleared successfully!");
+        if(!isOrderPlaced)
+          this.toastr.success("Cart cleared successfully!");
       }, err=> {
-        this.toastr.error("Clearing cart unsuccessfull!");
+        if(!isOrderPlaced)
+          this.toastr.error("Clearing cart unsuccessfull!");
       });
   }
 
@@ -117,7 +119,7 @@ export class UserCartComponent implements OnInit {
         this.http.post("https://localhost:5001/api/order/add" , order)
           .subscribe(response => {
             this.toastr.success("Your order have been placed successfully!");
-            this.clearCart();
+            this.clearCart(true);
         }, err => {
           this.toastr.error("There was an error to place the order!");
         });

@@ -1,6 +1,18 @@
 <app-user-nav></app-user-nav>
 <br><br><br>
 
+<div class="row" style="width: 50%; margin: 0 auto; min-height: 95%;" *ngIf="!orderList || orderList==null || orderList.length==0">
+    <div class="col">
+        <table class="table table-hover">
+            <thead>
+              <tr style="background-color: tan;">
+                <th style="text-align: center;">You haven't make any order yet</th>
+              </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
 <div style="min-height: 90%;">
     <mat-accordion>
         <div *ngFor="let order of orderList | filterOrder : loggedUser : 'userName' " class="container">
