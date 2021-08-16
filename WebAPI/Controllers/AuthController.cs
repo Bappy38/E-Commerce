@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using WebAPI.Models;
+using WebAPI.Other;
 using WebAPI.Services;
 
 namespace WebAPI.Controllers
@@ -68,7 +70,9 @@ namespace WebAPI.Controllers
             var claims = new List<Claim>();
             claims.Add(new Claim("Role", "user"));
 
-            if (user.UserName == credential.UserName && user.Password == credential.Password)
+            var passwordHash = new PassHash(credential.Password , user.Password);
+
+            if (user.UserName == credential.UserName && passwordHash.validatePassword())
             {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
 
@@ -97,11 +101,14 @@ namespace WebAPI.Controllers
             if (credential != null)
                 return BadRequest("This username already exist! Try with another username.");
 
-            _authService.Post(user);
-
             SignIn cred = new SignIn();
             cred.UserName = user.UserName;
             cred.Password = user.Password;
+
+            PassHash obj = new PassHash(user.Password, "");
+            user.Password = obj.getHashedPass();
+
+            _authService.Post(user);
 
             return userSignIn(cred);
         }
@@ -110,6 +117,9 @@ namespace WebAPI.Controllers
         [HttpPut , Route("userdetail-update")]
         public IActionResult UpdateUserDetail([FromBody]User updatedUser)
         {
+            PassHash obj = new PassHash(updatedUser.Password, "");
+            updatedUser.Password = obj.getHashedPass();
+
             _authService.Put(updatedUser);
             return Ok();
         }

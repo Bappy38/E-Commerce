@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { iUserCart } from '../../model/iUserCart';
+import { debounceTime, distinctUntilChanged, retry, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-signup',
@@ -50,7 +51,12 @@ export class UserSignupComponent implements OnInit {
       "OrderedProductList":[]
     }
 
+    //User sign up doesn't work properly after hashed password. 
     this.http.post("https://localhost:5001/api/auth/user-signup" , Credential)
+      .pipe(
+        retry(0),
+        shareReplay()
+      )
       .subscribe(response => {
         const token = (<any>response).token;
         localStorage.setItem("jwt" , token);
@@ -59,9 +65,11 @@ export class UserSignupComponent implements OnInit {
         sessionStorage.setItem('loggedUser' , Credential.UserName);
 
         this.http.post("https://localhost:5001/api/usercart/add", userCart)
+        .pipe(
+          shareReplay()
+        )
         .subscribe(response => {
-            this.router.navigate(['**']);
-            window.location.reload();
+            this.router.navigate(['/']);
             this.toastr.success('Welcome '+ Credential.UserName);
         }, err=> {
           console.error("Can't add an empty user cart");
