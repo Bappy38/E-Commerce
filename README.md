@@ -30,3 +30,15 @@
 
 https://user-images.githubusercontent.com/32066256/129045709-cd17722c-56c1-4094-8b06-0509d2f069b3.mp4
 
+#Things you can learn from this project:
+<ul>
+  <li>Angular Routing</li>
+  <li>Angular Material Dialog. How to pass data to dialog and receive data from dialog</li>
+  <li>Many more about angular material</li>
+  <li>Sharing data between components by Input-Output or via an intermediary service</li>
+  <li>JWT authentication and role-based authorization and Route-guard</li>
+  <li>PDF Generation with PDFMake <a href="https://www.c-sharpcorner.com/article/client-side-pdf-generation-in-angular-with-pdfmake/">Link</a> </li>
+  <li>Using pipes for sorting and filtering<li>
+  <li>Server side pagination</li>
+</ul>
+
