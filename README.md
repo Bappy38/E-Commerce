@@ -40,6 +40,6 @@ https://user-images.githubusercontent.com/32066256/129045709-cd17722c-56c1-4094-
   <li>JWT authentication and role-based authorization and Route-guard</li>
   <li>PDF Generation with <a href="https://www.c-sharpcorner.com/article/client-side-pdf-generation-in-angular-with-pdfmake/">PDFMake</a> </li>
   <li>Using pipes for sorting and filtering</li>
-  <li>Server side pagination</li>
+  <li><a href = "https://code-maze.com/paging-aspnet-core-webapi/">Server Side Pagination</a></li>
 </ul>
 
