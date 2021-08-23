@@ -25,7 +25,7 @@
 
 <div class="row">
     <div *ngFor = "let item of prodList | paginate: {itemsPerPage:8 , 
-        currentPage: page , totalLength: totProd} | filter:searchProduct:'pName' | sort:[SortByParam , SortDirection] " 
+        currentPage: pageNumber , totalItems: totProd} | filter:searchProduct:'pName' | sort:[SortByParam , SortDirection] " 
         class="shadow-lg col-sm-3 p-3">
 
         <app-user-pcard [product]="item"></app-user-pcard>
@@ -34,6 +34,6 @@
 </div>
 <br><br>
 <div>
-    <pagination-controls class="my-pagination" (pageChange) = "page = $event"></pagination-controls>
+    <pagination-controls class="my-pagination" (pageChange) = "pageNumber = $event" (pageChange) = "getData()"></pagination-controls>
 </div>
 <br><br>

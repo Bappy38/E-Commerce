@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ProductService } from '../../services/product.service';
 import { iProduct } from '../../model/iProduct';
+import { shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-plist',
@@ -11,7 +12,7 @@ import { iProduct } from '../../model/iProduct';
 export class UserPlistComponent implements OnInit {
   prodList: iProduct[];
   totProd:number;
-  page:number = 1;
+  pageNumber:number = 1;
   searchProduct:string = '';
   selectedProduct:string = '';
   SortByParam: string = '';
@@ -20,13 +21,29 @@ export class UserPlistComponent implements OnInit {
   constructor(private http : HttpClient , private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.productService.getAllProduct().subscribe(response => {
+    this.pageNumber = 1;
+    this.getData();
+
+    this.productService.productsCount()
+      .pipe(
+        shareReplay()
+      )
+      .subscribe(response => {
+        this.totProd = response;
+        console.log(this.totProd);
+      })
+  }
+
+  getData(){
+    this.productService.getAllProduct(this.pageNumber , 8)
+      .pipe(
+        shareReplay()
+      )
+      .subscribe(response => {
       this.prodList = response;
-      this.totProd = this.prodList.length;
     }, err=> {
       console.log("Can't call product service!");
     });
-    this.page = 1;
   }
 
   onProductFilter(){

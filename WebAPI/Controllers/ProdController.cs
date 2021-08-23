@@ -65,8 +65,19 @@ namespace WebAPI.Controllers
 
         //Get product list
         [HttpGet, Route("query")]
-        public ActionResult<List<Product>> Get() =>
-            _productService.Get();
+        public IActionResult GetProducts([FromQuery]QueryStringParameters productParameter)
+        {
+            var products = _productService.GetProducts(productParameter);
+            return Ok(products);
+        }
+
+        //Get product count
+        [HttpGet , Route("count")]
+        public ActionResult<int> ProductsCount()
+        {
+            var totalItems = _productService.FindAll().Count();
+            return totalItems;
+        }
 
         //Get specific product
         [HttpPost , Route("single-query")]

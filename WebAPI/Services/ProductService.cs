@@ -25,8 +25,17 @@ namespace WebAPI.Services
             _products.Find<Product>(product => product.pName == pName).FirstOrDefault();
 
         //Get the list of product
-        public List<Product> Get() =>
+        public List<Product> FindAll() =>
             _products.Find(product => true).ToList();
+
+        public IEnumerable<Product> GetProducts(QueryStringParameters productParameter)
+        {
+            return FindAll()
+                .OrderBy(prod => prod.pName)
+                .Skip((productParameter.PageNumber - 1) * productParameter.PageSize)
+                .Take(productParameter.PageSize)
+                .ToList();
+        }
 
         //Add a new product
         public void Post(Product product)

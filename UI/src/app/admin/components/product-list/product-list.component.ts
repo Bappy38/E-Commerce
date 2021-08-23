@@ -4,8 +4,9 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
-import {AddProductComponent} from '../add-product/add-product.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { ProductService } from 'src/app/user/services/product.service';
+import { shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -16,39 +17,34 @@ export class ProductListComponent implements OnInit {
 
   prodList:any;
   totProd:number;
-  page:number = 1;
+  pageNumber:number = 1;
 
   constructor(private router : Router , private http : HttpClient , 
-    private dialog : MatDialog , private toastr : ToastrService) { }
-
-  @ViewChild(MatPaginator) paginator : MatPaginator;
+    private dialog : MatDialog , private toastr : ToastrService,
+    private productService: ProductService) { }
   
   ngOnInit(): void {
-    this.http.get("https://localhost:5001/api/product/query")
+      this.pageNumber = 1;
+      this.productService.productsCount()
+      .pipe(
+        shareReplay()
+      )
       .subscribe(response => {
-        this.prodList = response;
-      });
-      this.totProd = this.prodList.length;
+        this.totProd = response;
+        console.log(this.totProd);
+      })
+      this.getData();
   }
 
-  openAddDialog(){
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "800px";
-    dialogConfig.height = "600px";
-
-    let dialogRef = this.dialog.open(AddProductComponent , dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == 'true'){
-        console.log("Added successfully!");
-      }
+  getData(){
+    this.productService.getAllProduct(this.pageNumber , 8)
+      .pipe(
+        shareReplay()
+      )
+      .subscribe(response => {
+      this.prodList = response;
+    }, err=> {
+      console.log("Can't call product service!");
     });
-  }
-
-  logOut(){
-    localStorage.removeItem("jwt");
-    this.router.navigate(['admin-login']);
   }
 }

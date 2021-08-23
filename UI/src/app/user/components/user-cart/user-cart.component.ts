@@ -16,7 +16,6 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./user-cart.component.css']
 })
 export class UserCartComponent implements OnInit {
-  existingPList: any;
   myCart: iUserCart;
   totalCost: number = 0;
   User = {
@@ -30,10 +29,6 @@ export class UserCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.storeCart();
-    this.prodService.getAllProduct()
-      .subscribe(response => {
-        this.existingPList = response;
-      });
   }
 
   storeCart()
