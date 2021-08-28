@@ -9,7 +9,7 @@
     <div class="col-sm-3">
         <div class="btn-group">
             <label style="margin-top: 8px;">Sort By &nbsp;</label>
-            <select [(ngModel)] = 'SortByParam'>
+            <select [(ngModel)] = 'SortByParam' (click)="onSortParamChange()">
                 <option value="pName">Product Name</option>
                 <option value="pPrice">Price</option>
             </select>
@@ -25,7 +25,7 @@
 
 <div class="row">
     <div *ngFor = "let item of prodList | paginate: {itemsPerPage:8 , 
-        currentPage: pageNumber , totalItems: totProd} | filter:searchProduct:'pName' | sort:[SortByParam , SortDirection] " 
+        currentPage: pageNumber , totalItems: totProd}" 
         class="shadow-lg col-sm-3 p-3">
 
         <app-user-pcard [product]="item"></app-user-pcard>

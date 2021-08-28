@@ -7,15 +7,23 @@ namespace WebAPI.Models
 {
     public class QueryStringParameters
     {
-        const int maxPageSize = 50;
         private int pageSize = 10;
+
+        //For Paging
         public int PageNumber { get; set; } = 1;
-        public int PageSize { 
+        public int PageSize {
             get {
                 return pageSize;
             } set {
-                pageSize = (value > maxPageSize) ? maxPageSize : value;
+                pageSize = (value > 10) ? 10 : value;
             } 
         }
+
+        //For Sorting
+        public string sortProperty { get; set; } = "";
+        public string sortingOrder { get; set; } = "";
+
+        //For Searching
+        public string searchString { get; set; } = "";
     }
 }

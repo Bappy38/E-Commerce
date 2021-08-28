@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebAPI.Data;
 using WebAPI.Services;
 using static WebAPI.Models.OrderDBSetting;
 using static WebAPI.Models.ProductDBSetting;
@@ -36,12 +37,12 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //Add product database
+            services.AddSingleton<ProductDbClient>();
+
             services.Configure<ProductListDBSetting>(
                 Configuration.GetSection(nameof(ProductListDBSetting)));
-
             services.AddSingleton<IProductListDBSetting>(sp =>
                 sp.GetRequiredService<IOptions<ProductListDBSetting>>().Value);
-
             services.AddSingleton<ProductService>();
             //
 
@@ -80,7 +81,7 @@ namespace WebAPI
             {
                 options.AddPolicy("EnableCORS", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost:4200")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });

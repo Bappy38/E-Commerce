@@ -1,10 +1,11 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.Data;
 using WebAPI.Models;
-using static WebAPI.Models.ProductDBSetting;
 
 namespace WebAPI.Services
 {
@@ -12,43 +13,66 @@ namespace WebAPI.Services
     {
         private readonly IMongoCollection<Product> _products;
 
-        public ProductService(IProductListDBSetting setting)
+        public ProductService(ProductDbClient client)
         {
-            var client = new MongoClient(setting.ConnectionString);
-            var database = client.GetDatabase(setting.DatabaseName);
-
-            _products = database.GetCollection<Product>(setting.ProductCollectionName);
+            _products = client.All();
         }
 
-        //Get an specific product
-        public Product Get(string pName) =>
+        public List<Product> GetAll() => _products.Find(product => true).ToList();
+
+        public Product GetOne(string pName) =>
             _products.Find<Product>(product => product.pName == pName).FirstOrDefault();
 
-        //Get the list of product
-        public List<Product> FindAll() =>
-            _products.Find(product => true).ToList();
-
-        public IEnumerable<Product> GetProducts(QueryStringParameters productParameter)
-        {
-            return FindAll()
-                .OrderBy(prod => prod.pName)
-                .Skip((productParameter.PageNumber - 1) * productParameter.PageSize)
-                .Take(productParameter.PageSize)
-                .ToList();
-        }
-
-        //Add a new product
-        public void Post(Product product)
-        {
-            _products.InsertOne(product);
-        }
-
-        //Update a product details
-        public void Put(Product updatedProduct) =>
+        public void UpdateOne(Product updatedProduct) =>
             _products.ReplaceOne(product => product.pName == updatedProduct.pName, updatedProduct);
 
-        //Remove a product
-        public void Delete(Product pr) =>
+        public void DeleteOne(Product pr) =>
             _products.DeleteOne(product => product.pName == pr.pName);
+
+        public Product AddOne(Product product)
+        {
+            _products.InsertOne(product);
+            return product;
+        }
+
+        public Object Query(QueryStringParameters productParameter)
+        {
+            var filter = Builders<Product>.Filter.Empty;
+
+            if (!string.IsNullOrEmpty(productParameter.searchString))
+            {
+                filter = Builders<Product>.Filter
+                            .Regex("pName", new BsonRegularExpression(productParameter.searchString, "i")) |
+                         Builders<Product>.Filter
+                            .Regex("pDescription", new BsonRegularExpression(productParameter.searchString, "i"));
+            }
+
+            var find = _products.Find(filter);
+
+            if(productParameter.sortingOrder == "asc")
+            {
+                if (productParameter.sortProperty == "pName")
+                    find = find.SortBy(prod => prod.pName);
+                else if (productParameter.sortProperty == "pPrice")
+                    find = find.SortBy(prod => prod.pPrice);
+            }
+            else
+            {
+                if (productParameter.sortProperty == "pName")
+                    find = find.SortByDescending(prod => prod.pName);
+                else if (productParameter.sortProperty == "pPrice")
+                    find = find.SortByDescending(prod => prod.pPrice);
+            }
+
+            var total = find.CountDocuments();
+
+            return new
+            {
+                data = find.Skip((productParameter.PageNumber - 1) * productParameter.PageSize)
+                        .Limit(productParameter.PageSize)
+                        .ToList(),
+                totProd = total
+            };
+        }
     }
 }

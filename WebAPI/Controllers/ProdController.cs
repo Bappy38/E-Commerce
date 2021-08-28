@@ -22,12 +22,12 @@ namespace WebAPI.Controllers
         [HttpPost , Route("add")]
         public IActionResult AddProduct([FromBody]Product product)
         {
-            var prod = _productService.Get(product.pName);
+            var prod = _productService.GetOne(product.pName);
 
             if (prod != null)
                 return BadRequest("We have already added this product");
 
-            _productService.Post(product);
+            _productService.AddOne(product);
             return Ok();
         }
 
@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
         [HttpPut , Route("update")]
         public IActionResult UpdateProduct([FromBody]Product product)
         {
-            var prod = _productService.Get(product.pName);
+            var prod = _productService.GetOne(product.pName);
 
             if (prod == null)
                 return NotFound();
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             prod.pUnit = product.pUnit;
             prod.pDescription = product.pDescription;
 
-            _productService.Put(prod);
+            _productService.UpdateOne(prod);
             return Ok();
         }
 
@@ -54,12 +54,12 @@ namespace WebAPI.Controllers
         [HttpPost , Route("delete")]
         public IActionResult DeleteProduct([FromBody]Product product)
         {
-            var prod = _productService.Get(product.pName);
+            var prod = _productService.GetOne(product.pName);
 
             if (prod == null)
                 return NotFound();
 
-            _productService.Delete(product);
+            _productService.DeleteOne(product);
             return Ok();
         }
 
@@ -67,23 +67,15 @@ namespace WebAPI.Controllers
         [HttpGet, Route("query")]
         public IActionResult GetProducts([FromQuery]QueryStringParameters productParameter)
         {
-            var products = _productService.GetProducts(productParameter);
+            var products = _productService.Query(productParameter);
             return Ok(products);
-        }
-
-        //Get product count
-        [HttpGet , Route("count")]
-        public ActionResult<int> ProductsCount()
-        {
-            var totalItems = _productService.FindAll().Count();
-            return totalItems;
         }
 
         //Get specific product
         [HttpPost , Route("single-query")]
         public ActionResult<Product> Get([FromBody]Product product)
         {
-            var prod = _productService.Get(product.pName);
+            var prod = _productService.GetOne(product.pName);
 
             return prod;
         }

@@ -23,24 +23,16 @@ export class UserPlistComponent implements OnInit {
   ngOnInit(): void {
     this.pageNumber = 1;
     this.getData();
-
-    this.productService.productsCount()
-      .pipe(
-        shareReplay()
-      )
-      .subscribe(response => {
-        this.totProd = response;
-        console.log(this.totProd);
-      })
   }
 
   getData(){
-    this.productService.getAllProduct(this.pageNumber , 8)
+    this.productService.getAllProduct(this.pageNumber , 8, this.SortByParam, this.SortDirection, this.searchProduct)
       .pipe(
         shareReplay()
       )
       .subscribe(response => {
-      this.prodList = response;
+      this.prodList = response.data;
+      this.totProd = response.totProd;
     }, err=> {
       console.log("Can't call product service!");
     });
@@ -48,19 +40,27 @@ export class UserPlistComponent implements OnInit {
 
   onProductFilter(){
     this.searchProduct = this.selectedProduct;
+    this.getData();
   }
 
   onProductFilterClear(){
     this.searchProduct = '';
     this.selectedProduct = '';
+    this.getData();
   }
 
   onSortDirection(){
     if(this.SortDirection == 'asc'){
       this.SortDirection = 'desc';
+      this.getData();
     }
     else{
       this.SortDirection = 'asc';
+      this.getData();
     }
+  }
+
+  onSortParamChange(){
+    this.getData();
   }
 }

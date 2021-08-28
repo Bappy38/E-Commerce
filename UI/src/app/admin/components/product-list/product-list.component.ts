@@ -25,24 +25,17 @@ export class ProductListComponent implements OnInit {
   
   ngOnInit(): void {
       this.pageNumber = 1;
-      this.productService.productsCount()
-      .pipe(
-        shareReplay()
-      )
-      .subscribe(response => {
-        this.totProd = response;
-        console.log(this.totProd);
-      })
       this.getData();
   }
 
   getData(){
-    this.productService.getAllProduct(this.pageNumber , 8)
+    this.productService.getAllProduct(this.pageNumber , 8, '', '', '')
       .pipe(
         shareReplay()
       )
       .subscribe(response => {
-      this.prodList = response;
+      this.prodList = response.data;
+      this.totProd = response.totProd;
     }, err=> {
       console.log("Can't call product service!");
     });
