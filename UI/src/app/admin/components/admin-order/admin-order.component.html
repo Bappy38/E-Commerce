@@ -1,6 +1,10 @@
 <app-admin-nav></app-admin-nav>
 <br><br><br>
 
+<div *ngIf="!orderList">
+    <app-spinner></app-spinner>
+</div>
+
 <div style="min-height: 90%;">
     <mat-accordion>
         <div *ngFor="let order of orderList" class="container">

@@ -41,6 +41,7 @@ import { FilterOrderPipe } from './Pipes/filter-order.pipe';
 import { FooterComponent } from './common component/footer/footer.component';
 import { CustomerCareComponent } from './user/components/customer-care/customer-care.component';
 import { AdminOrderComponent } from './admin/components/admin-order/admin-order.component';
+import { SpinnerComponent } from './common component/spinner/spinner.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -74,7 +75,8 @@ export function tokenGetter(){
     FilterOrderPipe,
     FooterComponent,
     CustomerCareComponent,
-    AdminOrderComponent
+    AdminOrderComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

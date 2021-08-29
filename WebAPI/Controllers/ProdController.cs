@@ -75,7 +75,7 @@ namespace WebAPI.Controllers
         [HttpPost , Route("single-query")]
         public ActionResult<Product> Get([FromBody]Product product)
         {
-            var prod = _productService.GetOne(product.pName);
+            var prod = _productService.GetOne(product.Id);
 
             return prod;
         }

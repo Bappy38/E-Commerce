@@ -23,7 +23,11 @@
     </div>
 </div>
 
-<div class="row">
+<div *ngIf="!prodList">
+    <app-spinner></app-spinner>
+</div>
+
+<div class="row" *ngIf="prodList">
     <div *ngFor = "let item of prodList | paginate: {itemsPerPage:8 , 
         currentPage: pageNumber , totalItems: totProd}" 
         class="shadow-lg col-sm-3 p-3">
@@ -33,7 +37,7 @@
     </div>
 </div>
 <br><br>
-<div>
+<div *ngIf="prodList">
     <pagination-controls class="my-pagination" (pageChange) = "pageNumber = $event" (pageChange) = "getData()"></pagination-controls>
 </div>
 <br><br>

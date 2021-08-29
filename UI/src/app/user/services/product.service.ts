@@ -12,11 +12,10 @@ export class ProductService {
   constructor(private http : HttpClient) { }
 
   getProduct(id: string){
-    return this.getAllProduct(1 , 8, "", "", "").pipe(
-      map(prodList => {
-        return prodList.find(product => product.id === id);
-      })
-    )
+    const reqProduct = {
+      "id": id
+    }
+    return this.http.post("https://localhost:5001/api/product/single-query",reqProduct);
   }
 
   getAllProduct(pageNumber:number , itemsPerPage:number, sortProperty: string,
@@ -25,6 +24,7 @@ export class ProductService {
       url += pageNumber.toString() + "&pageSize=" + itemsPerPage.toString();
       url += "&sortProperty=" + sortProperty + "&sortingOrder=";
       url += sortingOrder + "&searchString=" + searchString;
+
     return this.http.get(url);
   }
 }

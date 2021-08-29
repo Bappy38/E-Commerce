@@ -20,8 +20,8 @@ namespace WebAPI.Services
 
         public List<Product> GetAll() => _products.Find(product => true).ToList();
 
-        public Product GetOne(string pName) =>
-            _products.Find<Product>(product => product.pName == pName).FirstOrDefault();
+        public Product GetOne(string id) =>
+            _products.Find<Product>(product => product.Id == id).FirstOrDefault();
 
         public void UpdateOne(Product updatedProduct) =>
             _products.ReplaceOne(product => product.pName == updatedProduct.pName, updatedProduct);

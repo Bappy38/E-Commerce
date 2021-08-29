@@ -1,5 +1,10 @@
 <app-user-nav></app-user-nav>
 <br><br><br>
+
+<div *ngIf="!product">
+    <app-spinner></app-spinner>
+</div>
+
 <div class="row" style="min-height: 95%;">
     <div class="col-sm-12">
         <div class="card">

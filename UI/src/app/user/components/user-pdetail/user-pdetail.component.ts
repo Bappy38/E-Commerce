@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -26,15 +27,19 @@ export class UserPdetailComponent implements OnInit {
   constructor(private route : ActivatedRoute, private productService : ProductService,
     private jwtHelper : JwtHelperService, private dialog: MatDialog , 
     private toastr : ToastrService , private userCartService: UserCartService,
-    private router : Router) { }
+    private router : Router, private http : HttpClient) { }
 
   ngOnInit(): void {
     this.productOrder = this.route.snapshot.params['id'];
-
+    const reqProduct = {
+      "id": this.productOrder
+    }
     
-    this.productService.getProduct(this.productOrder).subscribe(response => {
-      this.product = response;
+    this.productService.getProduct(this.productOrder)
+      .subscribe(response => {
+        this.product = <iProduct>response;
     });
+
     this.Cnt = 1;
   }
 
