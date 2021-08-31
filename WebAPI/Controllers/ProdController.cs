@@ -22,11 +22,6 @@ namespace WebAPI.Controllers
         [HttpPost , Route("add")]
         public IActionResult AddProduct([FromBody]Product product)
         {
-            var prod = _productService.GetOne(product.pName);
-
-            if (prod != null)
-                return BadRequest("We have already added this product");
-
             _productService.AddOne(product);
             return Ok();
         }
@@ -35,7 +30,7 @@ namespace WebAPI.Controllers
         [HttpPut , Route("update")]
         public IActionResult UpdateProduct([FromBody]Product product)
         {
-            var prod = _productService.GetOne(product.pName);
+            var prod = _productService.GetOne(product.Id);
 
             if (prod == null)
                 return NotFound();
@@ -54,7 +49,7 @@ namespace WebAPI.Controllers
         [HttpPost , Route("delete")]
         public IActionResult DeleteProduct([FromBody]Product product)
         {
-            var prod = _productService.GetOne(product.pName);
+            var prod = _productService.GetOne(product.Id);
 
             if (prod == null)
                 return NotFound();
