@@ -15,7 +15,7 @@
 
 <div style="min-height: 90%;">
     <mat-accordion>
-        <div *ngFor="let order of orderList | filterOrder : loggedUser : 'userName' " class="container">
+        <div *ngFor="let order of orderList" class="container">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -39,23 +39,23 @@
                             </thead>
                             <tbody>
                               <tr *ngFor="let item of order.orderedProductList">
-                                <td>{{item.pName}}</td>
+                                <td>{{item.name}}</td>
                                 <td>
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <span>{{item.pPrice}}</span>
+                                            <span>{{item.price}}</span>
                                         </div>
                                         <div class="col-sm-1">
                                             <span> x </span>
                                         </div>
                                         <div class="col-sm-2">
-                                            <span>{{item.pQuantity}}</span>
+                                            <span>{{item.quantity}}</span>
                                         </div>
                                         <div class="col-sm-1">
                                             <span> = </span>
                                         </div>
                                         <div class="col-sm-3">
-                                            <span>{{item.pPrice * item.pQuantity}} Tk</span>
+                                            <span>{{item.price * item.quantity}} Tk</span>
                                         </div>
                                     </div>
                                 </td>

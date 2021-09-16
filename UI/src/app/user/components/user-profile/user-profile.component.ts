@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatLineModule } from '@angular/material/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -11,9 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserProfileComponent implements OnInit {
   userName: string;
-  FirstName: string;
-  LastName:  string;
-
   userProfile: any;
 
   updateProfileForm: FormGroup;
@@ -21,14 +18,15 @@ export class UserProfileComponent implements OnInit {
   constructor(private http : HttpClient, private toastr : ToastrService) { }
 
   ngOnInit(): void {
-    this.initFormControl();
     this.getUser();
   }
 
   initFormControl(){
     this.updateProfileForm = new FormGroup({
-      FirstName: new FormControl(this.FirstName),
-      LastName: new FormControl(this.LastName),
+      FirstName: new FormControl(this.userProfile.firstName),
+      LastName: new FormControl(this.userProfile.lastName),
+      Mobile: new FormControl(this.userProfile.mobile, [Validators.required , Validators.minLength(11)]),
+      Email: new FormControl(this.userProfile.email, [Validators.required , Validators.email]),
       UserName: new FormControl(this.userName)
     });
   }
@@ -39,14 +37,14 @@ export class UserProfileComponent implements OnInit {
       'FirstName': '',
       'LastName': '',
       'UserName': this.userName,
+      'Email': '',
+      'Mobile': '',
       'Password': ''
     }
 
     this.http.post("https://localhost:5001/api/auth/query-user" , dummyUser)
     .subscribe(response => {
       this.userProfile = response;
-      this.FirstName = this.userProfile.firstName;
-      this.LastName = this.userProfile.lastName;
       this.initFormControl();
     });
   }
@@ -54,6 +52,8 @@ export class UserProfileComponent implements OnInit {
   onSubmit(){
     this.userProfile.FirstName = this.updateProfileForm.value.FirstName;
     this.userProfile.LastName = this.updateProfileForm.value.LastName;
+    this.userProfile.Mobile = this.updateProfileForm.value.Mobile;
+    this.userProfile.Email = this.updateProfileForm.value.Email
     this.http.put("https://localhost:5001/api/auth/userdetail-update" , this.userProfile)
     .subscribe(response => {
       this.toastr.success('Profile updated successfully!');

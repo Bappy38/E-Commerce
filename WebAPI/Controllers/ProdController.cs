@@ -35,11 +35,17 @@ namespace WebAPI.Controllers
             if (prod == null)
                 return NotFound();
 
-            prod.pPrice = product.pPrice;
-            prod.pQuantity = product.pQuantity;
-            prod.pImage = product.pImage;
-            prod.pUnit = product.pUnit;
-            prod.pDescription = product.pDescription;
+            prod.SL = product.SL;
+            prod.Name = product.Name;
+            prod.Category = product.Category;
+            prod.SubCategory = product.SubCategory;
+            prod.Price = product.Price;
+            prod.OldPrice = product.OldPrice;
+            prod.Quantity = product.Quantity;
+            prod.Image = product.Image;
+            prod.Unit = product.Unit;
+            prod.Description = product.Description;
+            prod.Rating = product.Rating;
 
             _productService.UpdateOne(prod);
             return Ok();
@@ -54,7 +60,7 @@ namespace WebAPI.Controllers
             if (prod == null)
                 return NotFound();
 
-            _productService.DeleteOne(product);
+            _productService.DeleteOne(product.Id);
             return Ok();
         }
 

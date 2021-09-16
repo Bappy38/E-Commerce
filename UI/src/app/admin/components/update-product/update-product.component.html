@@ -1,52 +1,74 @@
-<div class="container" style="margin-top: 70px;">
-    <h1 class="field">Product Info</h1>
-    <form [formGroup]="newProductForm" (ngSubmit)="onSubmit()">
+<h4 mat-dialog-title>Product Info</h4>
 
-        <mat-form-field appearance="outline" class="field">
-            <mat-label>Product Order</mat-label>
-            <input required matInput placeholder="Enter the order no to sort product" 
-            formControlName="pOrder" [ngModel] = "this.product.pOrder">
-            </mat-form-field><br>
-        
-        <mat-form-field appearance="outline" class="field">
+<mat-dialog-content [formGroup]="newProductForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="field">
+        <mat-label>Product SL</mat-label>
+        <input matInput placeholder="Enter the serial no to sort product" 
+        formControlName="SL" [ngModel] = "this.product.sl">
+    </mat-form-field><br>
+    
+    <mat-form-field appearance="outline" class="field">
         <mat-label>Product Name</mat-label>
         <input required matInput placeholder="Enter the product name" 
-        formControlName="pName" [ngModel] = "this.product.pName" width="100px" readonly>
-        </mat-form-field><br>
+        formControlName="Name" [ngModel] = "this.product.name" width="100px">
+    </mat-form-field><br>
 
-        <mat-form-field appearance="outline" class="field">
+    <mat-form-field appearance="outline" class="field">
+        <mat-label>Select Category</mat-label>
+        <mat-select [(value)]="this.newProductForm.value.Category" formControlName="Category">
+            <mat-option *ngFor="let category of categories" [value]="category.Id">
+                {{category.Name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="outline" class="field">
+        <mat-label>Select SubCategory</mat-label>
+        <mat-select [(value)]="this.newProductForm.value.SubCategory" formControlName="SubCategory">
+            <mat-option *ngFor="let subCategory of getSubCategories()" [value]="subCategory.Id">
+                {{subCategory.Name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="outline" class="field">
         <mat-label>Unit Price</mat-label>
         <input required matInput placeholder="Enter product price per unit" 
-        formControlName="pPrice" [ngModel] = "this.product.pPrice">
-        </mat-form-field><br>
+        formControlName="Price" [ngModel] = "this.product.price">
+    </mat-form-field><br>
 
-        <mat-form-field appearance="outline" class="field">
+    <mat-form-field appearance="outline" class="field">
+        <mat-label>Old Price</mat-label>
+        <input matInput placeholder="Enter product's old price per unit" 
+        formControlName="OldPrice" [ngModel] = "this.product.oldPrice">
+    </mat-form-field><br>
+
+    <mat-form-field appearance="outline" class="field">
         <mat-label>Unit Name</mat-label>
-        <input required matInput placeholder="Enter the unit name of the product" 
-        formControlName="pUnit" [ngModel] = "this.product.pUnit">
-        </mat-form-field><br>
+        <input matInput placeholder="Enter the unit name of the product" 
+        formControlName="Unit" [ngModel] = "this.product.unit">
+    </mat-form-field><br>
 
-        <mat-form-field appearance="outline" class="field">
+    <mat-form-field appearance="outline" class="field">
         <mat-label>Quantity</mat-label>
         <input required matInput placeholder="Enter total number of unit is in stock" 
-        formControlName="pQuantity" [ngModel] = "this.product.pQuantity">
-        </mat-form-field><br>
+        formControlName="Quantity" [ngModel] = "this.product.quantity">
+    </mat-form-field><br>
 
-        <mat-form-field appearance="outline" class="field">
-            <mat-label>Image Url</mat-label>
-            <input required matInput placeholder="Enter the google drive url of image" 
-            formControlName="pImage" [ngModel] = "this.product.pImage">
-            </mat-form-field><br>
+    <mat-form-field appearance="outline" class="field">
+        <mat-label>Image Url</mat-label>
+        <input required matInput placeholder="Enter the google drive url of image" 
+        formControlName="Image" [ngModel] = "this.product.image">
+    </mat-form-field><br>
 
-        <mat-form-field appearance="outline" class="field">
-            <mat-label>Product Description</mat-label>
-            <input matInput placeholder="Describe the product in short" 
-            formControlName="pDescription" [ngModel] = "this.product.pDescription">
-            </mat-form-field><br>
+    <mat-form-field appearance="outline" class="field">
+        <mat-label>Product Description</mat-label>
+        <input matInput placeholder="Describe the product in short" 
+        formControlName="Description" [ngModel] = "this.product.description">
+    </mat-form-field><br>
 
-        <mat-dialog-actions>
-            <button mat-button mat-dialog-close>Cancel</button>
-            <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial>Submit</button>
-        </mat-dialog-actions>
-    </form>
-</div>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button> &nbsp;
+        <button class="mat-raised-button mat-primary" type="submit" (click)="onSubmit()">Update</button>
+    </mat-dialog-actions>
+</mat-dialog-content>

@@ -1,3 +1,49 @@
 li{
     margin-left: 10px;
 }
+
+.navbar-nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+
+.navbar-nav li a:hover{
+    background-color:coral;
+    border-radius: 5%;
+}
+
+.custom-button:hover{
+    background-color: rgb(1, 192, 192);
+    color: white;
+}
+
+.custom-button{
+    color: white;
+    background-color: transparent;
+}
+
+a{
+    font-family: sans-serif;
+    font-weight: inherit;
+    font-variant: initial;
+}
+
+button{
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+.dropdown-submenu {
+    position:relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top:-6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+} 

@@ -1,8 +1,7 @@
 import { Component, OnInit , Input , Inject , Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Guid } from 'guid-typescript';
-import { iOrder } from '../../model/iOrder';
-import { iProduct } from '../../model/iProduct';
+import { iOrder } from 'src/app/shared/model/iOrder';
 
 import { MatDialogRef , MAT_DIALOG_DATA } from '@angular/material/dialog';
 

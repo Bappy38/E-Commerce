@@ -10,8 +10,8 @@
         <div class="btn-group">
             <label style="margin-top: 8px;">Sort By &nbsp;</label>
             <select [(ngModel)] = 'SortByParam' (click)="onSortParamChange()">
-                <option value="pName">Product Name</option>
-                <option value="pPrice">Price</option>
+                <option value="Name">Product Name</option>
+                <option value="Price">Price</option>
             </select>
             <button type="button" (click) = "onSortDirection()">
                 <mat-icon>

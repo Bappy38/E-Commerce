@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { ProductService } from '../../services/product.service';
-import { iProduct } from '../../model/iProduct';
+import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { iProduct } from 'src/app/shared/model/iProduct';
 import { shareReplay } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import categories from 'src/assets/json/category.json';
 
 @Component({
   selector: 'app-user-plist',
   templateUrl: './user-plist.component.html',
   styleUrls: ['./user-plist.component.css']
 })
-export class UserPlistComponent implements OnInit {
+export class UserPlistComponent implements OnInit, AfterViewInit {
+
+  public categories: any = categories;
+  category: string;
+  subCategory: string;
   prodList: iProduct[];
   totProd:number;
   pageNumber:number = 1;
@@ -18,15 +24,20 @@ export class UserPlistComponent implements OnInit {
   SortByParam: string = '';
   SortDirection: string = 'asc';
 
-  constructor(private http : HttpClient , private productService: ProductService) { }
+  constructor(private http : HttpClient,
+              private productService: ProductService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.pageNumber = 1;
     this.getData();
   }
 
-  getData(){
-    this.productService.getAllProduct(this.pageNumber , 8, this.SortByParam, this.SortDirection, this.searchProduct)
+  ngAfterViewInit(): void {
+  }
+
+  getData(cat: string = '', subcat: string = ''){
+    console.log("Called from user nav!");
+    this.productService.getAllProduct(this.pageNumber , 8, this.SortByParam, this.SortDirection, this.searchProduct, cat, subcat)
       .pipe(
         shareReplay()
       )

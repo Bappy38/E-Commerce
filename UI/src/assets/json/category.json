@@ -1,0 +1,42 @@
+[
+    {
+        "Id": "0",
+        "Name": "Devices",
+        "SubCategory": [
+            {
+                "Id": "0",
+                "Name": "Smartphones"
+            },
+            {
+                "Id": "1",
+                "Name": "Feature Phone"
+            },
+            {
+                "Id": "2",
+                "Name": "Tablet"
+            },
+            {
+                "Id": "3",
+                "Name": "Laptop"
+            }
+        ]
+    },
+    {
+        "Id": "1",
+        "Name": "Accessories",
+        "SubCategory": [
+            {
+                "Id": "0",
+                "Name": "Mobile Accessories"
+            },
+            {
+                "Id": "1",
+                "Name": "Audio"
+            },
+            {
+                "Id": "2",
+                "Name": "Computer Components"
+            }
+        ]
+    }
+]

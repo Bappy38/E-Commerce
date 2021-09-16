@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import pdfMake from "pdfmake/build/pdfmake";  
 import pdfFonts from "pdfmake/build/vfs_fonts";  
-import { iOrder } from '../model/iOrder';
-import { iProduct } from '../model/iProduct';
 pdfMake.vfs = pdfFonts.pdfMake.vfs; 
 
 @Injectable({
@@ -14,7 +12,7 @@ export class PdfExportService {
   constructor() { }
 
   exportPDF(order: any){
-    let products: iProduct[] = [];
+    let products: any[] = [];
     let tempString: string = order.userName + " ... " + order.orderNo;
 
     for(var item of order.orderedProductList){
@@ -24,7 +22,7 @@ export class PdfExportService {
     let docDefinition = {
       content: [
         {
-          text: 'Fruit Corner',
+          text: 'Gadget Corner',
           fontSize: 16,
           alignment: 'center',
           color: '#047886'
@@ -81,7 +79,7 @@ export class PdfExportService {
             width: ['*' , 'auto' , 'auto' , 'auto'],
             body: [
               ['Product' , 'Price' , 'Quantity' , 'Amount'],
-              ...products.map (p => ([p.pName , p.pPrice , p.pQuantity , (p.pPrice * p.pQuantity).toFixed(2)])),
+              ...products.map (p => ([p.name , p.price , p.quantity , (p.price * p.quantity).toFixed(2)])),
               [{text: 'Total Amount' , colSpan:3} , {} , {} , order.totalCost.toFixed(2)]
             ]
           }

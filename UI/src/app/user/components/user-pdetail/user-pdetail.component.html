@@ -11,12 +11,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-4">
-                        <div class="img-wrapper" *ngIf="product && product.pImage">
-                            <img class="card-img-top" src="{{product.pImage}}">
+                        <div class="img-wrapper" *ngIf="product">
+                            <img class="card-img-top" src="{{product.image}}">
                         </div>
                     </div>
                     <div class="col-sm-7" *ngIf="product">
-                        <h3>{{product.pName}}</h3>
+                        <h3>{{product.name}}</h3>
 
                         <ng-template #t let-fill="fill">
                             <span class="star" [class.full]="fill === 100">
@@ -27,8 +27,13 @@
                         <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
                         <pre>Rating: <b>{{currentRate}}</b></pre>
                         <hr>
-                        <h4 style="color: orange;"> ৳ {{product.pPrice}} Per {{product.pUnit}}</h4>
-                        Available: {{product.pQuantity}} {{product.pUnit}} <br><br>
+                        <h4 style="color: orange;"> 
+                            ৳ {{product.price}}
+                            <span *ngIf="product.unit">
+                                Per {{product.unit}}
+                            </span>
+                        </h4>
+                        Available: {{product.quantity}} {{product.unit}} <br><br>
 
                         
                         <div class="btn-group" style="height: 30px;">
@@ -56,7 +61,7 @@
                         <mat-tab-group>
                             <mat-tab label="Description"> 
                                 <div class="tab">
-                                    <h5>{{product.pDescription}}</h5>
+                                    <h5>{{product.Description}}</h5>
                                 </div>
                             </mat-tab>
                             <mat-tab label="Detail"> 

@@ -1,4 +1,4 @@
-import { iProduct } from "./iProduct";
+import { iProduct } from "src/app/shared/model/iProduct";
 
 export interface iUserCart
 {

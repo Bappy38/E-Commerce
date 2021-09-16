@@ -5,46 +5,70 @@
     <form [formGroup]="newProductForm" (ngSubmit)="onSubmit()">
 
         <mat-form-field appearance="outline" class="field">
-            <mat-label>Product Order</mat-label>
-            <input required matInput placeholder="Enter the order no to sort product" 
-            formControlName="pOrder">
-            </mat-form-field><br>
+            <mat-label>Product SL</mat-label>
+            <input matInput placeholder="Enter the serial no to sort product" 
+            formControlName="SL">
+        </mat-form-field><br>
         
         <mat-form-field appearance="outline" class="field">
-        <mat-label>Product Name</mat-label>
-        <input required matInput placeholder="Enter the product name" 
-        formControlName="pName">
+            <mat-label>Product Name</mat-label>
+            <input required matInput placeholder="Enter the product name" 
+            formControlName="Name">
         </mat-form-field><br>
 
         <mat-form-field appearance="outline" class="field">
-        <mat-label>Unit Price</mat-label>
-        <input required matInput placeholder="Enter product price per unit" 
-        formControlName="pPrice">
+            <mat-label>Select Category</mat-label>
+            <mat-select formControlName="Category">
+                <mat-option *ngFor="let category of categories" [value]="category.Id">
+                    {{category.Name}}
+                </mat-option>
+            </mat-select>
         </mat-form-field><br>
 
         <mat-form-field appearance="outline" class="field">
-        <mat-label>Unit Name</mat-label>
-        <input required matInput placeholder="Enter the unit name of the product" 
-        formControlName="pUnit">
+            <mat-label>Product SubCategory</mat-label>
+            <mat-select formControlName="SubCategory">
+                <mat-option *ngFor="let subCategory of getSubCategories()" [value]="subCategory.Id">
+                    {{subCategory.Name}}
+                </mat-option>
+            </mat-select>
         </mat-form-field><br>
 
         <mat-form-field appearance="outline" class="field">
-        <mat-label>Quantity</mat-label>
-        <input required matInput placeholder="Enter total number of unit is in stock" 
-        formControlName="pQuantity">
+            <mat-label>Unit Price</mat-label>
+            <input required matInput placeholder="Enter product price per unit" 
+            formControlName="Price">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Old Price</mat-label>
+            <input matInput placeholder="Enter product's old price per unit" 
+            formControlName="OldPrice">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Unit Name</mat-label>
+            <input matInput placeholder="Enter the unit name of the product" 
+            formControlName="Unit">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Quantity</mat-label>
+            <input required matInput placeholder="Enter total number of unit is in stock" 
+            formControlName="Quantity">
         </mat-form-field><br>
 
         <mat-form-field appearance="outline" class="field">
             <mat-label>Image Url</mat-label>
             <input required matInput placeholder="Enter the google drive url of image" 
-            formControlName="pImage">
-            </mat-form-field><br>
+            formControlName="Image">
+        </mat-form-field><br>
 
         <mat-form-field appearance="outline" class="field">
             <mat-label>Product Description</mat-label>
             <input matInput placeholder="Describe the product in short" 
-            formControlName="pDescription">
-            </mat-form-field><br>
+            formControlName="Description">
+        </mat-form-field><br>
 
         <button mat-raised-button color="primary" style="padding-left: 20px; 
         height: 50px; width: 150px;"  type="submit" 

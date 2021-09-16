@@ -42,6 +42,8 @@ export class UserSignupComponent implements OnInit {
     const Credential = {
       "FirstName": this.signupForm.value.FirstName,
       "LastName": this.signupForm.value.LastName,
+      "Email": this.signupForm.value.Email,
+      "Mobile": this.signupForm.value.Mobile,
       "UserName": this.signupForm.value.UserName,
       "Password": this.signupForm.value.Password
     }

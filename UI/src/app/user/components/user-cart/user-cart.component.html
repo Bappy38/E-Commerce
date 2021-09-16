@@ -12,23 +12,23 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of myCart.orderedProductList">
-                <td>{{item.pName}}</td>
+                <td>{{item.name}}</td>
                 <td>
                     <div class="row">
                         <div class="col-sm-2">
-                            <span>{{item.pPrice}}</span>
+                            <span>{{item.price}}</span>
                         </div>
                         <div class="col-sm-1">
                             <span> x </span>
                         </div>
                         <div class="col-sm-2">
-                            <span>{{item.pQuantity}}</span>
+                            <span>{{item.quantity}}</span>
                         </div>
                         <div class="col-sm-1">
                             <span> = </span>
                         </div>
                         <div class="col-sm-2">
-                            <span>{{item.pPrice * item.pQuantity}}</span>
+                            <span>{{item.price * item.quantity}}</span>
                         </div>
                     </div>
                 </td>

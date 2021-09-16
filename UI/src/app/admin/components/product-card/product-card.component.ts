@@ -1,7 +1,7 @@
 import { Component, OnInit , Input } from '@angular/core';
 
 import {MatDialog , MatDialogConfig} from '@angular/material/dialog';
-import {YesNoDialogComponent} from 'src/app/common component/yes-no-dialog/yes-no-dialog.component';
+import {YesNoDialogComponent} from 'src/app/shared/components/yes-no-dialog/yes-no-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import {HttpClient} from '@angular/common/http';
 import {UpdateProductComponent} from '../update-product/update-product.component';
@@ -17,6 +17,7 @@ export class ProductCardComponent implements OnInit {
   constructor(private dialog : MatDialog , private toastr : ToastrService , private http : HttpClient) { }
 
   ngOnInit(): void {
+    console.log(this.product);
   }
 
   openRemoveDialog()
@@ -47,14 +48,12 @@ export class ProductCardComponent implements OnInit {
 
   openEditDialog()
   {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true,
-    dialogConfig.autoFocus = true,
-    dialogConfig.width = "800px",
-    dialogConfig.height = "600px"
-    dialogConfig.data = this.product;
-
-    let dialogRef = this.dialog.open(UpdateProductComponent , dialogConfig);
+    let dialogRef = this.dialog.open(UpdateProductComponent , {
+      data : this.product,
+      width: '600px',
+      hasBackdrop: false,
+      panelClass: 'filter-popup'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'true'){

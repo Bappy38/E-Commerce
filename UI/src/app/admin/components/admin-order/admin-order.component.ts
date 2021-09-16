@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
-import { iOrder } from 'src/app/user/model/iOrder';
+import { iOrder } from 'src/app/shared/model/iOrder';
 import { HttpClient } from '@angular/common/http';
 import { PdfExportService } from 'src/app/user/services/pdf-export.service';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
-import { YesNoDialogComponent } from 'src/app/common component/yes-no-dialog/yes-no-dialog.component';
+import { YesNoDialogComponent } from 'src/app/shared/components/yes-no-dialog/yes-no-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 
 interface Status {
@@ -27,7 +27,6 @@ export class AdminOrderComponent implements OnInit {
   options: Status[] = [
     {value: 'Preparing Order' , viewValue: 'Preparing'},
     {value: 'Ready to deliver' , viewValue: 'Ready'},
-    {value: 'Order Shipped' , viewValue: 'Shipped'},
     {value: 'Delivered' , viewValue: 'Delivered'},
     {value: 'Cancelled' , viewValue: 'Cancelled'}
   ]

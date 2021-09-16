@@ -40,6 +40,14 @@ namespace WebAPI.Controllers
         public ActionResult<List<Order>> Get() =>
             _orderService.Get();
 
+        //Get Order of an specific user
+        [HttpPost, Route("single-query")]
+        public ActionResult<List<Order>> GetOne([FromBody]SignIn User)
+        {
+            var orderList = _orderService.Get(User.UserName);
+            return orderList;
+        }
+
         //Update a order
         [HttpPut , Route("update")]
         public IActionResult UpdateOrder([FromBody]Order updatedOrder)

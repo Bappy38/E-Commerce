@@ -3,21 +3,16 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { iProduct } from '../model/iProduct';
+import { iProduct } from 'src/app/shared/model/iProduct';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { iUserCart } from '../model/iUserCart';
-import { reject, resolve } from 'q';
-import { EMPTY } from 'rxjs';
-import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserCartService {
 
-  userCart:iUserCart;
+  userCart:any;
   User = {
     "UserName": sessionStorage.getItem('loggedUser'),
     "Password": "dummyPass"
@@ -45,8 +40,8 @@ export class UserCartService {
         let productExist: Boolean = false;
 
         for(let kth in this.userCart.orderedProductList){
-          if(this.userCart.orderedProductList[kth].pName == product.pName){
-            this.userCart.orderedProductList[kth].pQuantity += product.pQuantity;
+          if(this.userCart.orderedProductList[kth].Name == product.Name){
+            this.userCart.orderedProductList[kth].Quantity += product.Quantity;
             productExist = true;
             break;
           }
@@ -71,12 +66,12 @@ export class UserCartService {
     );
   }
 
-  async removeProduct(product : iProduct)
+  async removeProduct(product : any)
   {
     this.storeCart().then(
       (val) => {
         this.userCart.orderedProductList.forEach( (item , index) => {
-          if(item.pName == product.pName)
+          if(item.name == product.name)
             this.userCart.orderedProductList.splice(index , 1);
         });
         this.http.put("https://localhost:5001/api/usercart/update", this.userCart)

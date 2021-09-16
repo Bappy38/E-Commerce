@@ -37,6 +37,10 @@ namespace WebAPI.Services
         public List<Order> Get() =>
             _orders.Find(order => true).ToList();
 
+        //Get the order list of an specific user
+        public List<Order> Get(string UserName) =>
+            _orders.Find(order => order.UserName == UserName).ToList();
+
         //Update an order
         public void Put(Order updatedOrder) =>
             _orders.ReplaceOne(order => order.OrderNo == updatedOrder.OrderNo, updatedOrder);

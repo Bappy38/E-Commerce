@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { ProductService } from 'src/app/user/services/product.service';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { shareReplay } from 'rxjs/operators';
 
 @Component({
@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit {
   }
 
   getData(){
-    this.productService.getAllProduct(this.pageNumber , 8, '', '', '')
+    this.productService.getAllProduct(this.pageNumber , 8, '', '', '', '', '')
       .pipe(
         shareReplay()
       )

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { iOrder } from '../../model/iOrder';
+import { iOrder } from 'src/app/shared/model/iOrder';
 import { HttpClient } from '@angular/common/http';
 import { PdfExportService } from '../../services/pdf-export.service';
 
@@ -18,15 +18,21 @@ export class UserOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.initData();
-    console.log('Order!!!!!!!!!!!');
+    console.log(this.orderList);
   }
 
   initData(){
-    this.http.get("https://localhost:5001/api/order/query")
+    this.http.post("https://localhost:5001/api/order/single-query", this.getUser())
       .subscribe(response => {
         this.orderList = <iOrder[]>response;
     });
-    this.loggedUser = sessionStorage.getItem('loggedUser');
+  }
+
+  getUser(){
+    return {
+      UserName : sessionStorage.getItem('loggedUser'),
+      Password : ''
+    }
   }
 
   invoicePrint(order: any){

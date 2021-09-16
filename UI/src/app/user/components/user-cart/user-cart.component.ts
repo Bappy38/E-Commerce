@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { iUserCart } from '../../model/iUserCart';
 import { UserCartService } from '../../services/user-cart.service';
 import { HttpClient } from '@angular/common/http';
-import { iProduct } from '../../model/iProduct';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog , MatDialogConfig } from '@angular/material/dialog';
-import { YesNoDialogComponent } from 'src/app/common component/yes-no-dialog/yes-no-dialog.component';
+import { YesNoDialogComponent } from 'src/app/shared/components/yes-no-dialog/yes-no-dialog.component';
 import { UserPlaceorderComponent } from '../user-placeorder/user-placeorder.component';
-import { iOrder } from '../../model/iOrder';
-import { ProductService } from '../../services/product.service';
+import { iOrder } from 'src/app/shared/model/iOrder';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'app-user-cart',
@@ -16,7 +15,7 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./user-cart.component.css']
 })
 export class UserCartComponent implements OnInit {
-  myCart: iUserCart;
+  myCart: any;
   totalCost: number = 0;
   User = {
     "UserName": sessionStorage.getItem('loggedUser'),
@@ -37,25 +36,29 @@ export class UserCartComponent implements OnInit {
     this.http.post("https://localhost:5001/api/usercart/query" , this.User)
     .subscribe(response => {
       this.myCart = <iUserCart>response;
-      if(this.myCart && this.myCart.orderedProductList && this.myCart.orderedProductList.length > 0){
-        this.totalCost = 40;
-
-        for(let item of this.myCart.orderedProductList){
-          this.totalCost += (item.pPrice * item.pQuantity);
-        }
-      }
+      this.calculateCost();
     });
   }
 
-  removeItem(product: iProduct)
+  calculateCost(){
+    if(this.myCart && this.myCart.orderedProductList && this.myCart.orderedProductList.length > 0){
+      this.totalCost = 40;
+
+      for(let item of this.myCart.orderedProductList){
+        this.totalCost += (item.price * item.quantity);
+      }
+    }
+  }
+
+  removeItem(product: any)
   {
     this.cartService.removeProduct(product).then(
       (val) => {
         this.toastr.success("Item remove from cart!");
         this.myCart.orderedProductList.forEach( (item , index) => {
-          if(item.pName == product.pName){
+          if(item.name == product.name){
             this.myCart.orderedProductList.splice(index , 1);
-            this.totalCost -= (item.pPrice * item.pQuantity);
+            this.totalCost -= (item.Price * item.Quantity);
           }
         });
       },

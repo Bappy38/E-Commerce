@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { iProduct } from '../../model/iProduct';
-import { iUserCart } from '../../model/iUserCart';
-import { ProductService } from '../../services/product.service';
+import { iProduct } from 'src/app/shared/model/iProduct';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { UserCartService } from '../../services/user-cart.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,8 +17,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./user-pdetail.component.css']
 })
 export class UserPdetailComponent implements OnInit {
-  productOrder: string;
-  product: iProduct;
+  productId: string;
+  product: any;
   currentRate:number = 4.5;
   Cnt:number;
 
@@ -30,12 +29,9 @@ export class UserPdetailComponent implements OnInit {
     private router : Router, private http : HttpClient) { }
 
   ngOnInit(): void {
-    this.productOrder = this.route.snapshot.params['id'];
-    const reqProduct = {
-      "id": this.productOrder
-    }
+    this.productId = this.route.snapshot.params['id'];
     
-    this.productService.getProduct(this.productOrder)
+    this.productService.getProduct(this.productId)
       .subscribe(response => {
         this.product = <iProduct>response;
     });
@@ -44,7 +40,7 @@ export class UserPdetailComponent implements OnInit {
   }
 
   toggleMore(){
-    if(this.Cnt < this.product.pQuantity)
+    if(this.Cnt < this.product.Quantity)
       this.Cnt++;
   }
   toggleLess(){
@@ -71,22 +67,25 @@ export class UserPdetailComponent implements OnInit {
 
   addToCart(){
     const orderedProduct = {
-      id: this.product.id,
-      pOrder: this.product.pOrder,
-      pName: this.product.pName,
-      pPrice: this.product.pPrice,
-      pUnit: this.product.pUnit,
-      pQuantity: this.Cnt,
-      pImage: this.product.pImage,
-      pDescription: this.product.pDescription
+      Id: this.product.id,
+      SL: this.product.sl,
+      Name: this.product.name,
+      Category: this.product.category,
+      SubCategory: this.product.subCategory,
+      Price: this.product.price,
+      Unit: this.product.unit,
+      Quantity: this.Cnt,
+      Image: this.product.image,
+      Description: this.product.description,
+      Rating: this.product.rating
     }
 
     if(!this.isloggedIn()){
       this.openLoginDialog();
       return;
     }
-    if(this.Cnt > this.product.pQuantity){
-      this.toastr.error("Sorry! You can order "+ this.product.pQuantity + " " + this.product.pUnit + " only!");
+    if(this.Cnt > this.product.Quantity){
+      this.toastr.error("Sorry! You can order "+ this.product.Quantity + " " + this.product.Unit + " only!");
       return;
     }
 

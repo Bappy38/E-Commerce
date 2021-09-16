@@ -1,27 +1,43 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-md navbar-light fixed-top" style="background: #0073aa">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/">FruitCorner</a>
+      <a class="navbar-brand" routerLink="/" style="color: white;">Gadget Corner</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+          <!--Category menu start-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;"> Category </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li class="dropdown-submenu" *ngFor="let category of this.categories">
+                  <a class="dropdown-item" role="button" (click)="setCategory(category.Id, '')">{{category.Name}}</a>
+                  <ul class="dropdown-menu" *ngIf="category.SubCategory && category.SubCategory.length > 0">
+                    <li *ngFor="let subCategory of category.SubCategory">
+                      <a class="dropdown-item" role="button" (click)="setCategory(category.Id, subCategory.Id)">{{subCategory.Name}}</a>
+                    </li>
+                  </ul>
+                </li>
+            </ul>
+          </li>
+          <!--Category menu end-->
+
           <li class="nav-item">
             <a class="nav-link" routerLink="" (click)="gotoCart()"
-            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+            routerLinkActive="active" style="color: white;">
             My Cart</a>
           </li>
   
           <li class="nav-item">
             <a class="nav-link" routerLink="" (click)="gotoOrder()"
-            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+            routerLinkActive="active" style="color: white;">
             Track My Order</a>
           </li>
   
           <li class="nav-item">
             <a class="nav-link" routerLink="" (click)="gotoCustomerCare()"
-            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+            routerLinkActive="active" style="color: white;">
             Customer Care</a>
           </li>
         </ul>
@@ -29,7 +45,7 @@
         <ul class="navbar-nav ml-auto mb-2 mb-lg-0" >
           <li class="nav-item" *ngIf="isUserAuthenticated()">
             <div ngbDropdown class="d-inline-block">
-              <button class="btn btn-outline-dark" id="dropdownBasic1" ngbDropdownToggle>{{currUser}}</button>
+              <button *ngIf="currUser" class="btn custom-button" id="dropdownBasic1" ngbDropdownToggle>{{currUser}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu dropdown-menu-right">
 
                 <button ngbDropdownItem (click)="gotoUserProfile()">
@@ -60,8 +76,8 @@
           </li>
           <li class="nav-item" *ngIf="!isUserAuthenticated()">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button class="btn btn-outline-primary my-2 my-sm-0" (click)="openLoginDialog()">Login</button>
-              <button class="btn btn-outline-primary my-2 my-sm-0" (click)="gotoSignUp()">Sign Up</button>
+              <button class="btn custom-button my-2 my-sm-0" (click)="openLoginDialog()">Login</button>
+              <button class="btn custom-button my-2 my-sm-0" (click)="gotoSignUp()">Sign Up</button>
             </div>
           </li>
         </ul>

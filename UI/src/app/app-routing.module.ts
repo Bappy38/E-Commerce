@@ -26,6 +26,7 @@ const routes: Routes = [
   {path: 'admin-order' , component: AdminOrderComponent , canActivate:[AdminAuthGuardService]},
 
   {path: '' , component: UserHomeComponent},
+  {path: 'home/:id', component: UserHomeComponent},
   {path: 'user-signup' , component: UserSignupComponent},
   {path: 'user-changepass' , component: UserChangepassComponent},
   {path: 'user-profile' , component: UserProfileComponent},
@@ -36,7 +37,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    onSameUrlNavigation: 'reload'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

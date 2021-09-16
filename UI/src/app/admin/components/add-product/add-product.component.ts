@@ -4,6 +4,7 @@ import { ReactiveFormsModule , FormControl, FormGroup } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import {Router} from '@angular/router'
+import categories from 'src/assets/json/category.json';
 
 @Component({
   selector: 'app-add-product',
@@ -11,19 +12,30 @@ import {Router} from '@angular/router'
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
+  public categories: any = categories;
+
   newProductForm = new FormGroup({
-    pOrder: new FormControl(''),
-    pName: new FormControl(''),
-    pPrice: new FormControl(''),
-    pUnit: new FormControl(''),
-    pQuantity: new FormControl(''),
-    pImage: new FormControl(''),
-    pDescription: new FormControl('')
+    SL: new FormControl(''),
+    Name: new FormControl(''),
+    Category: new FormControl(null),
+    SubCategory: new FormControl(null),
+    Price: new FormControl(''),
+    OldPrice: new FormControl(''),
+    Unit: new FormControl(''),
+    Quantity: new FormControl(''),
+    Image: new FormControl(''),
+    Description: new FormControl('')
   });
 
   constructor(private http : HttpClient , private toastr : ToastrService , private router : Router) { }
 
   ngOnInit(): void {
+  }
+
+  getSubCategories(): any {
+    if(!this.newProductForm.value.Category)
+      return;
+    return categories[this.newProductForm.value.Category].SubCategory;
   }
 
   processDriveLink(link:string):string
@@ -42,20 +54,23 @@ export class AddProductComponent implements OnInit {
 
   onSubmit(){
     const newProduct = {
-      'pOrder' : this.newProductForm.value.pOrder,
-      'pName' : this.newProductForm.value.pName,
-      'pPrice' : this.newProductForm.value.pPrice,
-      'pUnit' : this.newProductForm.value.pUnit,
-      'pQuantity' : this.newProductForm.value.pQuantity,
-      'pImage' : this.processDriveLink(this.newProductForm.value.pImage),
-      'pDescription': this.newProductForm.value.pDescription
+      'SL' : this.newProductForm.value.SL? this.newProductForm.value.SL: 10000,
+      'Name' : this.newProductForm.value.Name,
+      'Category': categories[this.newProductForm.value.Category].Name,
+      'SubCategory': categories[this.newProductForm.value.Category].SubCategory[this.newProductForm.value.SubCategory].Name,
+      'Price' : this.newProductForm.value.Price,
+      'OldPrice' : this.newProductForm.value.OldPrice,
+      'Unit' : this.newProductForm.value.Unit,
+      'Quantity' : this.newProductForm.value.Quantity,
+      'Image' : this.processDriveLink(this.newProductForm.value.Image),
+      'Description': this.newProductForm.value.Description,
+      'Rating': 5.0
     }
 
     this.http.post("https://localhost:5001/api/product/add" , newProduct)
     .subscribe(response => {
       this.toastr.success("Product added successfully!");
-      this.newProductForm.reset();
-      window.location.reload();
+      this.router.navigate(['admin-home']);
     }, err => {
       this.toastr.error("Sorry! There're some invalid data in product details!");
       this.router.navigate['/'];

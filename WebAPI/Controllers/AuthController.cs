@@ -117,9 +117,16 @@ namespace WebAPI.Controllers
         [HttpPut , Route("userdetail-update")]
         public IActionResult UpdateUserDetail([FromBody]User updatedUser)
         {
+            _authService.Put(updatedUser);
+            return Ok();
+        }
+
+        //Update User Password
+        [HttpPut, Route("userpassword-update")]
+        public IActionResult UpdateUserPass([FromBody]User updatedUser)
+        {
             PassHash obj = new PassHash(updatedUser.Password, "");
             updatedUser.Password = obj.getHashedPass();
-
             _authService.Put(updatedUser);
             return Ok();
         }

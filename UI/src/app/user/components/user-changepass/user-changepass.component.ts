@@ -47,33 +47,34 @@ export class UserChangepassComponent implements OnInit {
       return false;
   }
 
-  onSubmit(){
-    if(!this.isUserAuthenticated()){
-      this.initFormControl();
-      this.toastr.warning("Please login first!");
-      return;
+  isOldPasswordMatched(){
+    const dummyCredential = {
+      'UserName': sessionStorage.getItem('loggedUser'),
+      'Password': this.changePassForm.value.CurrPass
     }
+    return this.http.post("https://localhost:5001/api/auth/user-signin" , dummyCredential);
+  }
 
+  getExpectedUser(){
     const dummyUser = {
       'FirstName': '',
       'LastName': '',
+      'Email': '',
+      'Mobile': '',
       'UserName': sessionStorage.getItem('loggedUser'),
       'Password': ''
     }
+    
+    return this.http.post("https://localhost:5001/api/auth/query-user" , dummyUser);
+  }
 
-    this.http.post("https://localhost:5001/api/auth/query-user" , dummyUser)
-    .subscribe(expectedUser => {
+  changePassword()
+  {
+    this.getExpectedUser().subscribe(expectedUser => {
       this.updatedUser = expectedUser;
-
-      if(this.updatedUser.password != this.changePassForm.value.CurrPass){
-        this.toastr.error("Your entered current password is not correct!");
-        this.initFormControl();
-        return;
-      }
-
       this.updatedUser.Password = this.changePassForm.value.NewPass;
 
-      this.http.put("https://localhost:5001/api/auth/userdetail-update" , this.updatedUser)
+      this.http.put("https://localhost:5001/api/auth/userpassword-update" , this.updatedUser)
       .subscribe(response => {
         this.initFormControl();
         this.toastr.success("Password has been changed successfully!");
@@ -81,9 +82,23 @@ export class UserChangepassComponent implements OnInit {
         this.initFormControl();
         this.toastr.error("Sorry! There was an error!");
       });
-    }, err=> {
+    });
+  }
+
+  onSubmit(){
+    if(!this.isUserAuthenticated()){
       this.initFormControl();
-      this.toastr.error("Sorry! There was an error!");
+      this.toastr.warning("Please login first!");
+      return;
+    }
+
+    this.isOldPasswordMatched().subscribe(response => {
+      console.log('Current password matched!');
+      this.changePassword();
+    },
+    err => {
+      this.toastr.error('Current password does not matched!');
+      return;
     });
   }
 

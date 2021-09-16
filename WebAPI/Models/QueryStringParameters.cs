@@ -25,5 +25,9 @@ namespace WebAPI.Models
 
         //For Searching
         public string searchString { get; set; } = "";
+
+        //For categorized product
+        public string Category { get; set; } = "";
+        public string SubCategory { get; set; } = "";
     }
 }
