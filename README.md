@@ -42,5 +42,7 @@ https://user-images.githubusercontent.com/32066256/129045709-cd17722c-56c1-4094-
   <li>Using pipes for sorting and filtering</li>
   <li><a href = "https://code-maze.com/paging-aspnet-core-webapi/">Server Side Pagination</a></li>
   <li><a href = "https://www.youtube.com/watch?v=tmFmL73gBgw">Server Side searching & sorting</a></li>
+  <li>Using <a href = "https://www.youtube.com/watch?v=DXaIZmKAzQY&t=266s">view type</a> for accessing child component's method & property on runtime</li>
+  <li>How to store & read json file in client side</li>
 </ul>
 
