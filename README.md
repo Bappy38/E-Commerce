@@ -1,5 +1,5 @@
-# FruitCorner
-<b>FruitCorner</b> is a simple e-commerce site for fruitseller. It contains all basic features that an e-commerce site should have.
+# Gadget Corner
+<b>Gadget Corner</b> is a simple e-commerce site. It contains all basic features that an e-commerce site should have.
 
 
 # Features:
