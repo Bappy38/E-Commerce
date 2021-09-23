@@ -50,6 +50,7 @@ export class UserPlistComponent implements OnInit, AfterViewInit {
   }
 
   onProductFilter(){
+    this.pageNumber = 1;
     this.searchProduct = this.selectedProduct;
     this.getData();
   }
