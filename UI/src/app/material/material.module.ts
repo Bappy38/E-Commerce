@@ -13,6 +13,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const MaterialComponent = [
   MatButtonModule,
@@ -27,7 +29,9 @@ const MaterialComponent = [
   MatExpansionModule,
   MatSelectModule,
   MatTabsModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatProgressBarModule,
+  MatTooltipModule
 ]
 
 @NgModule({

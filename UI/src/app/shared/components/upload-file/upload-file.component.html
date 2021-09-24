@@ -2,10 +2,16 @@
     <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)"
     style="display: none">
 
-    <button mat-raised-button color="primary" (click)="file.click()">{{buttonName}}</button>
+    <button mat-raised-button color="primary"
+        matTooltip="Upload a picture with your name. The size must be within 100KB"
+        (click)="file.click()">
+        {{buttonName}}
+    </button>
 </div>
 <div>
     <span class="upload" *ngIf="progress > 0">
+        <mat-progress-bar [color]="color" mode="determinate" class="example-margin"
+        [value]="progress"></mat-progress-bar>
         {{progress}}%
     </span>
     <span class="upload" *ngIf="message">

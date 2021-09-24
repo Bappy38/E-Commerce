@@ -14,6 +14,7 @@ export class UploadFileComponent implements OnInit {
   @Output() public onUploadFinished: any = new EventEmitter();
 
   userName: string;
+  color: string = 'green'
   
   constructor(private http : HttpClient) { }
 
