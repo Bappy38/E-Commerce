@@ -42,6 +42,7 @@ import { FooterComponent } from 'src/app/shared/components/footer/footer.compone
 import { CustomerCareComponent } from './user/components/customer-care/customer-care.component';
 import { AdminOrderComponent } from './admin/components/admin-order/admin-order.component';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { UploadFileComponent } from './shared/components/upload-file/upload-file.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -76,7 +77,8 @@ export function tokenGetter(){
     FooterComponent,
     CustomerCareComponent,
     AdminOrderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    UploadFileComponent
   ],
   imports: [
     BrowserModule,

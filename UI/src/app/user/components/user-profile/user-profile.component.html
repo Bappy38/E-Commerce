@@ -1,10 +1,13 @@
 <app-user-nav></app-user-nav>
 <br><br><br>
 
-<div class="row">
-    <div class="col-2 m-auto">
-        <img src="https://drive.google.com/thumbnail?id=13gyG1UFLL1oZoSJYZVs-M5yxhM74Fb2Q" width="200px" height="300px">
-        <h5 style="margin-top: 30px; text-align: center;">{{userName}}</h5>
+<div class="row m-auto">
+    <div class="col-2 ml-auto">
+        <img [src]="createImgPath(userProfile.profilePicture)" alt="profile picture"
+        style="width: 200px; height: 200px;">
+        <app-upload-file (onUploadFinished)="uploadFinished($event)"
+        [buttonName]=' "Change Profile Picture" '>
+        </app-upload-file>
     </div>
     
     <div class="col-9 m-auto border-left">

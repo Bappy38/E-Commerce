@@ -26,8 +26,8 @@ namespace WebAPI.Controllers
         }
 
         //Admin Sign In
-        [HttpPost , Route("admin-signin")]
-        public IActionResult adminSignIn([FromBody]SignIn admin)
+        [HttpPost, Route("admin-signin")]
+        public IActionResult adminSignIn([FromBody] SignIn admin)
         {
             if (admin == null)
                 return BadRequest("Invalid client request");
@@ -56,8 +56,8 @@ namespace WebAPI.Controllers
         }
 
         //User Sign In
-        [HttpPost , Route("user-signin")]
-        public IActionResult userSignIn([FromBody]SignIn user)
+        [HttpPost, Route("user-signin")]
+        public IActionResult userSignIn([FromBody] SignIn user)
         {
             if (user == null)
                 return BadRequest("Invalid client request");
@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
             var claims = new List<Claim>();
             claims.Add(new Claim("Role", "user"));
 
-            var passwordHash = new PassHash(credential.Password , user.Password);
+            var passwordHash = new PassHash(credential.Password, user.Password);
 
             if (user.UserName == credential.UserName && passwordHash.validatePassword())
             {
@@ -93,8 +93,8 @@ namespace WebAPI.Controllers
         }
 
         //User Sign Up
-        [HttpPost , Route("user-signup")]
-        public IActionResult userSignUp([FromBody]User user)
+        [HttpPost, Route("user-signup")]
+        public IActionResult userSignUp([FromBody] User user)
         {
             var credential = _authService.Get(user.UserName);
 
@@ -114,8 +114,8 @@ namespace WebAPI.Controllers
         }
 
         //Update User Detail
-        [HttpPut , Route("userdetail-update")]
-        public IActionResult UpdateUserDetail([FromBody]User updatedUser)
+        [HttpPut, Route("userdetail-update")]
+        public IActionResult UpdateUserDetail([FromBody] User updatedUser)
         {
             _authService.Put(updatedUser);
             return Ok();
@@ -123,7 +123,7 @@ namespace WebAPI.Controllers
 
         //Update User Password
         [HttpPut, Route("userpassword-update")]
-        public IActionResult UpdateUserPass([FromBody]User updatedUser)
+        public IActionResult UpdateUserPass([FromBody] User updatedUser)
         {
             PassHash obj = new PassHash(updatedUser.Password, "");
             updatedUser.Password = obj.getHashedPass();
@@ -132,8 +132,8 @@ namespace WebAPI.Controllers
         }
 
         //Get an specific user
-        [HttpPost , Route("query-user")]
-        public ActionResult<User> GetUser([FromBody]User user)
+        [HttpPost, Route("query-user")]
+        public ActionResult<User> GetUser([FromBody] User user)
         {
             User ret = _authService.Get(user.UserName);
             if (ret == null)

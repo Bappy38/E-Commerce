@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class UserProfileComponent implements OnInit {
   userName: string;
   userProfile: any;
+  public response: {dbPath: ''}
+  imgPath: string;
 
   updateProfileForm: FormGroup;
 
@@ -27,7 +29,8 @@ export class UserProfileComponent implements OnInit {
       LastName: new FormControl(this.userProfile.lastName),
       Mobile: new FormControl(this.userProfile.mobile, [Validators.required , Validators.minLength(11)]),
       Email: new FormControl(this.userProfile.email, [Validators.required , Validators.email]),
-      UserName: new FormControl(this.userName)
+      UserName: new FormControl(this.userName),
+      ProfilePicture: new FormControl(this.userProfile.profilePicture)
     });
   }
 
@@ -39,7 +42,8 @@ export class UserProfileComponent implements OnInit {
       'UserName': this.userName,
       'Email': '',
       'Mobile': '',
-      'Password': ''
+      'Password': '',
+      'ProfilePicture': ''
     }
 
     this.http.post("https://localhost:5001/api/auth/query-user" , dummyUser)
@@ -50,11 +54,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmit(){
-    this.userProfile.FirstName = this.updateProfileForm.value.FirstName;
-    this.userProfile.LastName = this.updateProfileForm.value.LastName;
-    this.userProfile.Mobile = this.updateProfileForm.value.Mobile;
-    this.userProfile.Email = this.updateProfileForm.value.Email
-    this.http.put("https://localhost:5001/api/auth/userdetail-update" , this.userProfile)
+    const updatedUser = {
+      'Id': this.userProfile.id,
+      'FirstName': this.updateProfileForm.value.FirstName,
+      'LastName': this.updateProfileForm.value.LastName,
+      'Email': this.updateProfileForm.value.Email,
+      'Mobile': this.updateProfileForm.value.Mobile,
+      'UserName': this.userProfile.userName,
+      'Password': this.userProfile.password,
+      'ProfilePicture': this.updateProfileForm.value.ProfilePicture
+    }
+    this.http.put("https://localhost:5001/api/auth/userdetail-update" , updatedUser)
     .subscribe(response => {
       this.toastr.success('Profile updated successfully!');
     }, err=>{
@@ -67,4 +77,12 @@ export class UserProfileComponent implements OnInit {
     window.location.reload();
   }
 
+  public uploadFinished = (event) => {
+    this.response = event;
+    this.updateProfileForm.value.ProfilePicture = this.userProfile.profilePicture = this.response.dbPath;
+  }
+
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:5001/${serverPath}`;
+  }
 }
